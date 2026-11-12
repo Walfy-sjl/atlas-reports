@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,">
+<title>汽车行业政策库 · 按年度看</title>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#fff; --panel-2:#fafbfc; --ink:#101828; --muted:#475467;
+  --faint:#98a2b3; --line:#e4e7ec; --line-soft:#f0f2f5;
+  --accent:#0f766e; --accent-ink:#115e59; --accent-soft:#e7f8f5;
+  --danger:#b42318; --danger-soft:#fef3f2;
+  --warn:#b54708; --warn-soft:#fffaeb;
+  --ok:#067647; --ok-soft:#ecfdf3;
+  --info:#175cd3; --info-soft:#eff8ff;
+  --violet:#7c3aed; --violet-soft:#f4f0ff;
+  --radius:14px; --shadow:0 1px 2px rgba(16,24,40,.04), 0 2px 6px rgba(16,24,40,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0d1014; --panel:#151a20; --panel-2:#11161b; --ink:#e8eaed; --muted:#a7b0bd;
+    --faint:#6c7683; --line:#29313a; --line-soft:#1d242b;
+    --accent:#2dd4bf; --accent-ink:#5eead4; --accent-soft:#0f2e2b;
+    --danger:#fda29b; --danger-soft:#3b1219;
+    --warn:#fec84b; --warn-soft:#3a2505;
+    --ok:#75e0a7; --ok-soft:#0b2e1d;
+    --info:#84caff; --info-soft:#0b1f3a;
+    --violet:#c4b5fd; --violet-soft:#241a3d;
+    --shadow:0 1px 2px rgba(0,0,0,.3);
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent-ink)}
+.shell{max-width:1240px;margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+header.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 90%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.head{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:66px;padding-top:8px;padding-bottom:8px}
+.brand .eyebrow{font-size:10px;letter-spacing:.16em;color:var(--faint);font-weight:700;text-transform:uppercase}
+.brand h1{margin:1px 0 0;font-size:20px;letter-spacing:-.01em;line-height:1.2}
+.proto{display:inline-block;vertical-align:3px;margin-left:5px;font-size:9.5px;font-weight:700;
+  letter-spacing:.06em;color:var(--accent-ink);background:var(--accent-soft);padding:1px 6px;border-radius:99px}
+.brand .sub{font-size:12.5px;color:var(--muted);margin-top:3px}
+.mode-switch{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--panel);flex:none}
+.mode-switch a,.mode-switch span{padding:6px 9px;font-size:12px;text-decoration:none;color:var(--muted);white-space:nowrap}
+.mode-switch a:hover{color:var(--accent-ink);background:var(--panel-2)}
+.mode-switch .active{background:var(--accent-soft);color:var(--accent-ink);font-weight:650}
+.head-meta{display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--muted);white-space:nowrap}
+.head-meta b{color:var(--ink);font-variant-numeric:tabular-nums}
+.summary{display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:10px 2px 14px;font-size:12.5px;color:var(--muted)}
+.summary b{color:var(--ink);font-size:14px;font-variant-numeric:tabular-nums}
+.summary .gap-count{color:var(--danger);font-weight:600}
+
+.layout{display:grid;grid-template-columns:218px minmax(0,1fr);gap:22px;align-items:start;padding:4px 0 60px}
+.rail{position:sticky;top:82px}
+.rail-title{font-size:10.5px;font-weight:700;letter-spacing:.12em;color:var(--faint);text-transform:uppercase;margin:0 0 8px 2px}
+.rail-nav{display:flex;flex-direction:column;gap:2px}
+.rail-nav button{display:flex;align-items:center;gap:9px;border:0;background:transparent;text-align:left;
+  padding:8px 9px;border-radius:9px;color:var(--muted);font-size:13px;line-height:1.35}
+.rail-nav button:hover{background:var(--panel);color:var(--ink)}
+.rail-nav button[aria-current="true"]{background:var(--panel);color:var(--ink);box-shadow:var(--shadow);font-weight:600}
+.rail-nav .num{font-size:10px;color:var(--faint);font-variant-numeric:tabular-nums;width:16px}
+.rail-nav .name{flex:1;white-space:nowrap}
+.rail-nav .state{font-size:9.5px;color:var(--faint);white-space:nowrap;margin-left:auto}
+.rail-note{margin-top:16px;padding:11px 12px;border:1px dashed var(--line);border-radius:10px;
+  font-size:11.5px;color:var(--muted);background:var(--panel-2)}
+.rail-note b{display:block;color:var(--ink);font-size:12px;margin-bottom:3px}
+
+.module{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:18px 20px 14px;margin-bottom:18px;scroll-margin-top:92px}
+.module-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px}
+.kicker{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--faint);text-transform:uppercase}
+.module h2{margin:2px 0 2px;font-size:22px;letter-spacing:-.02em}
+.module .q{margin:0;font-size:13.5px;color:var(--muted)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tag{font-size:10.5px;padding:1px 7px;border-radius:99px;border:1px solid var(--line);
+  color:var(--muted);background:var(--panel-2);white-space:nowrap}
+.tag.teal{border-color:color-mix(in srgb,var(--accent) 35%,var(--line));color:var(--accent-ink);background:var(--accent-soft)}
+.module-badge{font-size:10.5px;color:var(--faint);white-space:nowrap;padding-top:4px}
+
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:11px}
+.scroll-hint{font-size:10.5px;color:var(--faint);text-align:right;padding:3px 2px 0}
+table.rule{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;min-width:820px;table-layout:fixed}
+.rule th{background:var(--panel-2);color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.03em;
+  text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+.rule th:first-child{width:22%}
+.rule td{padding:11px 10px;border-bottom:1px solid var(--line-soft);vertical-align:top;line-height:1.55}
+.rule tr:last-child td{border-bottom:0}
+.rule tbody tr:hover td{background:color-mix(in srgb,var(--accent) 4%,transparent)}
+.rule tr.current td{background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.rule tr.gap td{background:var(--danger-soft)}
+.rule tr.pending td{background:var(--warn-soft)}
+.rule tr.past td{opacity:.72}
+td.period{position:relative;padding-left:28px;white-space:normal}
+td.period::before{content:"";position:absolute;left:9px;top:0;bottom:0;width:2px;background:var(--line)}
+tr:first-child td.period::before{top:20px}
+tr:last-child td.period::before{bottom:calc(100% - 20px)}
+td.period::after{content:"";position:absolute;left:5px;top:19px;width:10px;height:10px;border-radius:99px;
+  background:var(--faint);border:2px solid var(--panel)}
+tr.current td.period::after{background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+tr.gap td.period::after{background:var(--danger)}
+tr.pending td.period::after{background:var(--warn)}
+.period b{display:block;font-size:12.5px;font-variant-numeric:tabular-nums;line-height:1.4}
+.period b .pfrom,.period b .pto{display:block;white-space:nowrap}
+.period .state{display:inline-block;margin-top:3px;font-size:10px;padding:0 6px;border-radius:99px;
+  border:1px solid var(--line);color:var(--muted);background:var(--panel)}
+tr.current .period .state{color:var(--accent-ink);border-color:color-mix(in srgb,var(--accent) 35%,var(--line));background:var(--accent-soft)}
+tr.gap .period .state{color:var(--danger);border-color:color-mix(in srgb,var(--danger) 30%,var(--line));background:var(--danger-soft)}
+tr.pending .period .state{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 30%,var(--line));background:var(--warn-soft)}
+.fn{font-size:9px;color:var(--accent-ink);margin-left:3px;vertical-align:super}
+.notes{padding:8px 2px 0;font-size:11.5px;color:var(--muted);line-height:1.55}
+.notes .fn-row{display:grid;grid-template-columns:16px minmax(0,1fr);gap:4px;margin-top:2px}
+.notes .fn-row b{color:var(--accent-ink);font-weight:700}
+.val{display:block}
+.val b{font-weight:650}
+.val .sub{display:block;font-size:11px;color:var(--faint);margin-top:2px;line-height:1.4}
+td.value.empty{color:var(--faint)}
+.src{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 2px 0;font-size:11px;color:var(--faint)}
+.src a{color:var(--muted);text-decoration:none}
+.src a:hover{color:var(--accent-ink);text-decoration:underline;text-underline-offset:2px}
+.src-lib{font-size:10px;color:var(--accent-ink);text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:0 4px}
+.src-lib:hover{background:var(--accent-soft)}
+.src .pending-chip{font-size:9.5px;color:var(--warn);border:1px solid color-mix(in srgb,var(--warn) 30%,var(--line));
+  background:var(--warn-soft);padding:0 5px;border-radius:99px}
+
+.empty-state{padding:18px;font-size:13px;color:var(--muted);text-align:center}
+footer{color:var(--faint);font-size:12px;border-top:1px solid var(--line);padding:16px 0 30px}
+footer .shell{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:1100px){
+  header.top{position:static}
+  .layout{grid-template-columns:1fr;gap:10px}
+  /* min-width:0 是键：网格项的默认 min-width 是 auto，横向不换行的导航会把整页撑开 */
+  .layout > *{min-width:0}
+  .rail{min-width:0;max-width:100%;position:sticky;top:0;z-index:20;background:var(--bg);padding:8px 0 8px;margin:0 -24px;
+    padding-left:24px;padding-right:24px;border-bottom:1px solid var(--line)}
+  #modules{min-width:0}
+  .rail-title,.rail-note{display:none}
+  .rail-nav{flex-direction:row;overflow-x:auto;gap:6px;scrollbar-width:none;min-width:0;max-width:100%}
+  .rail-nav::-webkit-scrollbar{display:none}
+  .rail-nav button{white-space:nowrap;border:1px solid var(--line);background:var(--panel);padding:6px 10px}
+  .rail-nav .num{display:none}
+  .rail-nav .state{display:none}
+  .module{scroll-margin-top:120px}
+}
+@media (max-width:720px){
+  .shell{padding:0 14px}
+  .head{flex-wrap:wrap;gap:8px}
+  .head-meta{width:100%;justify-content:flex-start;flex-wrap:wrap;white-space:normal}
+  .module{padding:14px}
+  .module h2{font-size:19px}
+  .rule{min-width:680px}
+  table.rule th:first-child{width:23%}
+}
+@media print{
+  header.top,.rail,.summary{display:none!important}
+  .layout{display:block}
+  .module{box-shadow:none;break-inside:avoid}
+  .table-wrap{overflow:visible}
+  table.rule{min-width:0}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="shell head">
+    <div class="brand">
+      <div class="eyebrow">Auto Atlas · Policy</div>
+      <h1>汽车行业政策库 <span class="proto">按年度看</span></h1>
+      <div class="sub">按模块竖向看时间线：购置税、车船税、双积分、以旧换新、消费税</div>
+    </div>
+    <div class="head-meta">
+      <div class="mode-switch" aria-label="视图切换"><a href="policy-buckets.html">按桶看</a><span class="active">按年度看</span></div>
+      <span>今天 <b id="today">2026-11-12</b></span>
+      <span>·</span>
+      <span>生成于 2026-11-12 16:17</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <div class="summary" id="summary"></div>
+  <div class="layout">
+    <aside class="rail">
+      <div class="rail-title">年度规则</div>
+      <nav class="rail-nav" id="rail" aria-label="模块导航"></nav>
+      <div class="rail-note">
+        <b>读法</b>
+        一个模块一条竖轴；每行是一个生效期。绿点＝当前，红点＝空窗，黄点＝待生效/待定。来源后带「库」的可跳回政策卡片。
+      </div>
+    </aside>
+    <main id="modules"></main>
+  </div>
+</div>
+
+<footer>
+  <div class="shell">
+    <span>政策库 · 按年度看 · 数据来自 <code>data/datas/policy/records/</code> 与官方公告补录</span>
+    <span>由 <code>python -m tools.policy views</code> 从 records + metrics 生成。</span>
+  </div>
+</footer>
+
+<script>
+const DATA = {"today": "2026-11-12", "generated": "2026-11-12 16:17", "modules": [{"id": "purchase-tax", "index": "01", "name": "购置税", "bucket": "税", "question": "买这台新能源车，今年免多少 / 减多少？", "applies": ["新能源乘用车", "BEV / PHEV（含增程）/ FCEV", "乘用车限额；非乘用车口径待核"], "columns": ["优惠", "乘用车上限", "BEV 乘用车门槛", "PHEV / 增程乘用车门槛"], "periods": [{"from": "2024-01-01", "to": "2025-12-31", "status": "已执行", "values": ["免征", "3 万元/辆", "续驶 ≥ 200km", "纯电续驶 ≥ 43km"], "note": "2024–2025 免征；上限只写新能源乘用车，非乘用车口径待核。", "sources": [{"id": "nev-purchase-tax-2023-no10", "label": "财政部 税务总局 工业和信息化部公告 2023 年第 10 号", "url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/gg/art/2023/art_4a6f9849758d4d47b0ffa6592958447d.html", "in_library": true}, {"id": "purchase-tax-tech-2023-no32", "label": "工业和信息化部 财政部 税务总局公告 2023 年第 32 号", "url": "https://fgk.chinatax.gov.cn/zcfgk/c100013/c5217984/content.html", "in_library": true}], "period": "2024-01-01 ~ 2025-12-31", "current": false}, {"from": "2026-01-01", "to": "2027-12-31", "status": "现行", "values": ["减半（实际 5%）", "1.5 万元/辆", "续驶 ≥ 200km + 百公里电耗 ≤ GB 36980.1—2025 限值", "等效全电里程 ≥ 100km；另加电量保持模式油耗/电耗要求"], "note": "2026 起 PHEV/增程门槛从 43km 提高到 100km；BEV 新增电耗限值。", "sources": [{"id": "nev-purchase-tax-2023-no10", "label": "财政部 税务总局 工业和信息化部公告 2023 年第 10 号", "url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/gg/art/2023/art_4a6f9849758d4d47b0ffa6592958447d.html", "in_library": true}, {"id": "purchase-tax-tech-2026-2027", "label": "文号待核（2025-10 三部门公告）", "url": "https://fgk.chinatax.gov.cn/zcfgk/c100013/c5243525/content.html", "in_library": true}], "period": "2026-01-01 ~ 2027-12-31", "current": true}, {"from": "2028-01-01", "to": "", "status": "空窗", "values": ["—", "?", "—", "—"], "note": "接续政策未出；如无新政，2028 起回到全额 10%。", "sources": [{"id": "nev-purchase-tax-2023-no10", "label": "财政部 税务总局 工业和信息化部公告 2023 年第 10 号", "url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/gg/art/2023/art_4a6f9849758d4d47b0ffa6592958447d.html", "in_library": true}], "period": "2028-01-01 起", "current": false}]}, {"id": "vehicle-tax", "index": "02", "name": "车船税", "bucket": "税", "question": "持有这台车，每年车船税怎么算？", "applies": ["乘用车 / 商用车", "纯电 / 插混（含增程）/ 燃料电池 / 节能车"], "columns": ["纯电 / 燃料电池乘用车", "节能车（HEV）", "纯电 / 插混 / 燃料电池商用车", "PHEV / 增程乘用车门槛"], "periods": [{"from": "2018-07-10", "to": "2024-06-30", "status": "已执行", "values": ["不征", "减半", "免征", "按 2018 年 74 号文（门槛待核）"], "note": "纯电乘用车、燃料电池乘用车不属于车船税征税范围，是「不征」，不是「免征」。", "sources": [{"id": "vehicle-tax-2018-no74", "label": "财税〔2018〕74 号", "url": "https://fgk.chinatax.gov.cn/zcfgk/c102416/c5202428/content.html", "in_library": true}], "period": "2018-07-10 ~ 2024-06-30", "current": false}, {"from": "2024-07-01", "to": "2025-12-31", "status": "已执行", "values": ["不征", "减半", "免征", "纯电续驶 ≥ 43km"], "sources": [{"id": "vehicle-tax-tech-2024-no10", "label": "工业和信息化部 财政部 税务总局公告 2024 年第 10 号", "url": "http://www.news.cn/auto/20240604/0e412001b7574760b55687718ee13c8f/c.html", "in_library": true}], "period": "2024-07-01 ~ 2025-12-31", "current": false}, {"from": "2026-01-01", "to": "2026-12-31", "status": "现行", "values": ["不征", "减半", "免征", "纯电续驶 ≥ 100km"], "note": "新申请车型门槛提高；存量目录车型按公告过渡口径执行。", "sources": [{"id": "cs-vehicle-tax-tech-2025-no25", "label": "工业和信息化部 财政部 税务总局公告 2025 年第 25 号", "url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/gg/art/2025/art_606731a437954948a891a949c862db83.html", "in_library": true}], "period": "2026-01-01 ~ 2026-12-31", "current": true}, {"from": "2027-01-01", "to": "", "status": "待生效", "values": ["不征", "取消减半", "取消免征", "—"], "note": "纯电乘用车 / 燃料电池乘用车仍不征；节能车和三类商用车优惠取消。", "sources": [{"id": "cs-vehicle-tax-2026-no19", "label": "财政部 税务总局 工业和信息化部公告 2026 年第 19 号", "url": "https://fgk.chinatax.gov.cn/zcfgk/c102416/c5250801/content.html", "in_library": true}], "period": "2027-01-01 起", "current": false}]}, {"id": "dual-credit", "index": "03", "name": "双积分", "bucket": "宏观", "question": "卖油车要买多少积分？新能源正积分值多少、能存多久？", "applies": ["乘用车企业", "BEV / PHEV（含增程）/ FCEV 乘用车"], "columns": ["NEV 积分比例", "低油耗乘用车核算", "纯电标准车型积分", "CAFC 侧", "NEV 正积分结转", "新机制"], "periods": [{"period": "2018 年度", "from": "2018-01-01", "to": "2018-12-31", "status": "已执行", "values": ["不设（≥3 万辆自 2019）", "未设", "0.012R+0.8（≤5）", "2014 版口径；结转 80%/次", "不得结转", "—"], "note": "44 号令 2018-04-01 施行，当年只做 CAFC 核算：传统能源乘用车年产/进口不满 3 万辆的企业不设 NEV 比例要求，达到 3 万辆的从 2019 年度才设。插混 2 分、燃料电池 0.16×P 同属 2017 版附件 2。", "sources": [{"id": "miit-order-44-2017-cafc-nev", "label": "工业和信息化部等五部门令第 44 号（2020 年第 53 号、2023 年第 64 号令两次修订）", "url": "https://www.miit.gov.cn/jgsj/zbys/qcgy/art/2020/art_53028bfc49574a46a786972e5f357fb0.html", "in_library": true}], "current": false}, {"period": "2019 年度", "from": "2019-01-01", "to": "2019-12-31", "status": "已执行", "values": ["10%", "未设", "0.012R+0.8（≤5）", "2014 版口径；结转 90%/次", "仅本年可等额结转 1 年", "—"], "note": "NEV 正积分原则上不得结转，只给 2019 年度一年的等额结转口子——过渡安排，不是常规规则。CAFC 结转从这一年起由 80% 提到 90%。", "sources": [{"id": "miit-order-44-2017-cafc-nev", "label": "工业和信息化部等五部门令第 44 号（2020 年第 53 号、2023 年第 64 号令两次修订）", "url": "https://www.miit.gov.cn/jgsj/zbys/qcgy/art/2020/art_53028bfc49574a46a786972e5f357fb0.html", "in_library": true}], "current": false}, {"period": "2020 年度", "from": "2020-01-01", "to": "2020-12-31", "status": "已执行", "values": ["12%", "未设", "0.012R+0.8（≤5）", "2014 版口径；结转 90%/次", "50%/次", "—"], "note": "53 号令把 NEV 正积分结转从「不得结转」放开到每次 50%（2020 年度起）。", "sources": [{"id": "miit-order-44-2017-cafc-nev", "label": "工业和信息化部等五部门令第 44 号（2020 年第 53 号、2023 年第 64 号令两次修订）", "url": "https://www.miit.gov.cn/jgsj/zbys/qcgy/art/2020/art_53028bfc49574a46a786972e5f357fb0.html", "in_library": true}], "current": false}, {"period": "2021 年度", "from": "2021-01-01", "to": "2021-12-31", "status": "已执行", "values": ["14%", "0.5 倍", "0.0056R+0.4（≤3.4）", "2014 版口径；结转 90%/次", "50%/次，≤3 年", "—"], "note": "53 号令 2021-01-01 施行：分值近乎腰斩；插混 1.6 分、燃料电池 0.08×P（≤6 分）；低油耗乘用车按 0.5 倍计入 NEV 达标值。", "sources": [{"id": "miit-order-44-2017-cafc-nev", "label": "工业和信息化部等五部门令第 44 号（2020 年第 53 号、2023 年第 64 号令两次修订）", "url": "https://www.miit.gov.cn/jgsj/zbys/qcgy/art/2020/art_53028bfc49574a46a786972e5f357fb0.html", "in_library": true}], "current": false}, {"period": "2022 年度", "from": "2022-01-01", "to": "2022-12-31", "status": "已执行", "values": ["16%", "0.3 倍", "0.0056R+0.4（≤3.4）", "2014 版口径；结转 90%/次", "50%/次，≤3 年", "—"], "sources": [{"id": "miit-order-44-2017-cafc-nev", "label": "工业和信息化部等五部门令第 44 号（2020 年第 53 号、2023 年第 64 号令两次修订）", "url": "https://www.miit.gov.cn/jgsj/zbys/qcgy/art/2020/art_53028bfc49574a46a786972e5f357fb0.html", "in_library": true}], "current": false}, {"period": "2023 年度", "from": "2023-01-01", "to": "2023-12-31", "status": "已执行", "values": ["18%", "0.2 倍", "0.0056R+0.4 → 0.0034R+0.2（≤2.3）", "2014 版口径；结转 90%/次", "50%/次，≤3 年", "积分池；CO₂ 核算"], "note": "64 号令 2023-08-01 施行、年中切换：标准车型分值平均下调约 40%（插混降到 1 分、燃料电池 0.05×P ≤4 分），新增新能源汽车积分池与企业平均 CO₂ 排放核算。2023 年度跨新旧两版分值，本库按「核算时点有效版本」记；官方未给这一年的过渡口径（待核）。", "sources": [{"id": "miit-order-44-2017-cafc-nev", "label": "工业和信息化部等五部门令第 44 号（2020 年第 53 号、2023 年第 64 号令两次修订）", "url": "https://www.miit.gov.cn/jgsj/zbys/qcgy/art/2020/art_53028bfc49574a46a786972e5f357fb0.html", "in_library": true}], "current": false}, {"period": "2024 年度", "from": "2024-01-01", "to": "2024-12-31", "status": "已执行", "values": ["28%", "0.2 倍", "0.0034R+0.2（≤2.3）", "2014 版口径；结转 90%/次", "50%/次，≤3 年", "积分池；循环外技术减免"], "note": "378 号通知：比例 28%、低油耗 0.2 倍；对制动能量回收、高效空调等循环外技术给油耗减免（可累加）。", "sources": [{"id": "cafc-nev-2024-2025", "label": "工信部通装函〔2023〕378 号", "url": "https://www.waizi.org.cn/law/215428.html", "in_library": true}], "current": false}, {"period": "2025 年度", "from": "2025-01-01", "to": "2025-12-31", "status": "已执行", "values": ["38%", "0.2 倍", "0.0034R+0.2（≤2.3）", "2014 版口径；结转 90%/次", "50%/次，≤3 年", "积分池；循环外技术减免"], "sources": [{"id": "cafc-nev-2024-2025", "label": "工信部通装函〔2023〕378 号", "url": "https://www.waizi.org.cn/law/215428.html", "in_library": true}], "current": false}, {"period": "2026 年度", "from": "2026-01-01", "to": "2026-12-31", "status": "现行", "values": ["48%", "0.1 倍", "0.0017R+0.15（≤1.2）", "2025 版口径；结转 90%/次", "50%/次，≤3 年", "低温续驶系数"], "note": "294 号通知：比例 48%、低油耗 0.1 倍；分值再砍约一半（R=300km 的纯电车型从顶格 1.2 分降到 0.66 分），插混 0.5 分、燃料电池 0.05×P（≤4 分），并新增低温续驶里程调整系数。", "sources": [{"id": "cafc-nev-2026-2027", "label": "工信部通装函〔2025〕294 号", "url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2025/art_c22055da7deb48c397ad16247beaff22.html", "in_library": true}], "current": true}, {"period": "2027 年度", "from": "2027-01-01", "to": "2027-12-31", "status": "待生效", "values": ["58%", "0.1 倍", "0.0017R+0.15（≤1.2）", "2025 版口径；结转 90%/次", "50%/次，≤3 年", "低温续驶系数"], "sources": [{"id": "cafc-nev-2026-2027", "label": "工信部通装函〔2025〕294 号", "url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2025/art_c22055da7deb48c397ad16247beaff22.html", "in_library": true}], "current": false}, {"period": "2028 年度", "from": "2028-01-01", "to": "", "status": "空窗", "values": ["空窗", "—", "—", "—", "—", "—"], "note": "2028 年度比例与分值未出；看 2027 Q4 是否发新通知（watch: cafc-nev-2028-next-stage）。", "sources": [{"id": "cafc-nev-2026-2027", "label": "工信部通装函〔2025〕294 号", "url": "https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2025/art_c22055da7deb48c397ad16247beaff22.html", "in_library": true}], "current": false}]}, {"id": "trade-in", "index": "04", "name": "以旧换新", "bucket": "补贴", "question": "用户报废 / 置换，今年能拿多少？", "applies": ["个人消费者", "旧车条件 + 新车目录", "新能源乘用车或 ≤2.0L 燃油乘用车"], "columns": ["报废更新", "置换更新", "新车范围", "旧车条件"], "periods": [{"from": "2024-04-24", "to": "2024-08-18", "status": "已执行", "values": ["新能源 1 万 / 燃油 7,000", "按车价分档（待核）", "目录内新能源乘用车或 ≤2.0L 燃油", "2011-06-30 前汽油 / 2013-06-30 前柴油 / 2018-04-30 前新能源（待核）"], "note": "2024 上半年口径；日期与金额待回原文核。", "sources": [{"id": "mofcom-trade-in-2024", "label": "商消费函〔2024〕75 号", "url": "http://www.mofcom.gov.cn/zcfb/gnmygl/art/2024/art_11812edee1284566a497221fb629e5de.html", "in_library": true}], "period": "2024-04-24 ~ 2024-08-18", "current": false}, {"from": "2024-08-19", "to": "2024-12-31", "status": "已执行", "values": ["新能源 2 万 / 燃油 1.5 万", "按车价分档（待核）", "同上", "同上"], "note": "2024-08 加码；同一年内变档，年度表要拆段。", "sources": [{"id": "mofcom-trade-in-2024-boost", "label": "商消费函〔2024〕392 号", "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2024/art_a82d4accdade4fb181330d9d24a1d766.html", "in_library": true}], "period": "2024-08-19 ~ 2024-12-31", "current": false}, {"from": "2025-01-01", "to": "2025-12-31", "status": "已执行", "values": ["新能源 2 万 / 燃油 1.5 万", "新能源 1.5 万 / 燃油 1.3 万", "目录内新能源乘用车或 ≤2.0L 燃油", "2025-01-08 前登记在本人名下"], "sources": [{"id": "mofcom-trade-in-2025", "label": "商办消费函〔2025〕8 号（待核）", "url": "https://www.mofcom.gov.cn/zfxxgk/fdzdgknr/ztfl/gnmygl/art/2025/art_d66e3819983742aeaab2db84d687d0aa.html", "in_library": true}], "period": "2025-01-01 ~ 2025-12-31", "current": false}, {"from": "2026-01-01", "to": "2026-12-31", "status": "现行", "values": ["新能源 12% / 燃油 10%（燃油待核），上限 2 万 / 1.5 万", "新能源 8% / 燃油 6%（燃油待核），上限 1.5 万 / 1.3 万", "目录内新能源乘用车或 ≤2.0L 燃油", "2025-01-08 前登记在本人名下"], "note": "2026 起从定额改为按车价比例；燃油比例/上限待回原文核。", "sources": [{"id": "mofcom-2026-trade-in", "label": "商办消费函 2025 年第 467 号", "url": "https://www.mofcom.gov.cn/zcfg/art/2025/art_c5ba34448a2a4eea83b1d0b89b699807.html", "in_library": true}], "period": "2026-01-01 ~ 2026-12-31", "current": true}, {"period": "2027 年度", "from": "2027-01-01", "to": "", "status": "待定", "values": ["待定", "待定", "待定", "待定"], "note": "接续政策未出；2026-12-31 前看下一年度细则。", "sources": [], "current": false}]}, {"id": "excise", "index": "05", "name": "消费税", "bucket": "税", "question": "超豪华车今年起征点多少？", "applies": ["乘用车 / 中轻型商用客车", "燃油 + 纯电 + 燃料电池等"], "columns": ["起征点（不含增值税）", "动力类型", "车辆范围"], "periods": [{"from": "2016-12-01", "to": "2025-07-19", "status": "已执行", "values": ["130 万元", "燃油", "乘用车 / 中轻型商用客车"], "sources": [{"id": "excise-2016-no129", "label": "财税〔2016〕129 号", "url": "https://fgk.chinatax.gov.cn/zcfgk/c102416/c5203630/content.html", "in_library": true}], "period": "2016-12-01 ~ 2025-07-19", "current": false}, {"from": "2025-07-20", "to": "", "status": "现行", "values": ["90 万元", "各种动力类型（含纯电、燃料电池）", "乘用车 / 中轻型商用客车"], "note": "2025 年内变档：1-1~7-19 仍是 130 万，7-20 起 90 万。", "sources": [{"id": "mof-2025-no3-luxury-excise", "label": "财政部 税务总局公告 2025 年第 3 号", "url": "https://m.mof.gov.cn/czxw/202507/t20250717_3968027.htm", "in_library": true}], "period": "2025-07-20 起", "current": true}]}], "stats": {"modules": 5, "periods": 25, "gaps": 2, "pending": 3}};
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const stateClass = s => s === "现行" ? "current" : s === "空窗" ? "gap" : s === "待生效" || s === "待定" ? "pending" : "past";
+
+function renderSummary(){
+  const s = DATA.stats;
+  $("#summary").innerHTML = `
+    <span><b>${s.modules}</b> 个模块</span>
+    <span><b>${s.periods}</b> 个时间段</span>
+    <span class="${s.gaps ? "gap-count" : ""}"><b>${s.gaps}</b> 个空窗</span>
+    <span><b>${s.pending}</b> 个待生效 / 待定</span>
+    <span style="margin-left:auto">滚动看模块；点模块名跳转</span>`;
+}
+
+function renderRail(){
+  $("#rail").innerHTML = DATA.modules.map(m => {
+    const cur = m.periods.find(r => r.current);
+    const state = cur ? "现行" : (m.periods.some(r => r.status === "空窗") ? "有空窗" : "");
+    return `<button data-goto="${esc(m.id)}" aria-current="false" title="${esc(cur ? cur.period : "")}">
+      <span class="num">${esc(m.index)}</span>
+      <span class="name">${esc(m.name)}</span>
+      <span class="state">${esc(state)}</span>
+    </button>`;
+  }).join("");
+}
+
+function renderModules(){
+  $("#modules").innerHTML = DATA.modules.map(m => {
+    const head = `<div class="module-head">
+      <div>
+        <div class="kicker">模块 ${esc(m.index)} · ${esc(m.bucket)}</div>
+        <h2>${esc(m.name)}</h2>
+        <p class="q">${esc(m.question)}</p>
+        <div class="tags">${m.applies.map((x,i) => `<span class="tag ${i === 0 ? "teal" : ""}">${esc(x)}</span>`).join("")}</div>
+      </div>
+      <div class="module-badge">${m.periods.length} 个时间段</div>
+    </div>`;
+
+    const noteNo = {}; let nn = 0;
+    m.periods.forEach((r, i) => { if (r.note) noteNo[i] = ++nn; });
+    const minW = m.columns.length >= 5 ? 820 : m.columns.length === 4 ? 720 : 620;
+    const table = `<div class="table-wrap"><table class="rule" style="min-width:${minW}px">
+      <thead><tr><th scope="col">期间</th>${m.columns.map(c => `<th scope="col">${esc(c)}</th>`).join("")}</tr></thead>
+      <tbody>${m.periods.map((r, i) => {
+        const cls = [stateClass(r.status), r.current ? "current" : ""].filter(Boolean).join(" ");
+        return `<tr class="${cls}">
+          <td class="period">
+            ${periodHtml(r.period)}
+            <span class="state">${esc(r.status)}</span>
+            ${r.note ? `<sup class="fn" title="${esc(r.note)}">${noteNo[i]}</sup>` : ""}
+          </td>
+          ${r.values.map((v,i) => `<td class="value ${v === "—" || v === "?" || v === "待定" ? "empty" : ""}">${fmtVal(v)}</td>`).join("")}
+        </tr>`;
+      }).join("")}</tbody>
+    </table></div>`;
+
+    const notes = m.periods.map((r,i) => r.note ? `<div class="fn-row"><b>${noteNo[i]}</b><span>${esc(r.note)}</span></div>` : "").join("");
+    const notesHtml = notes ? `<div class="notes">${notes}</div>` : "";
+
+    const sources = [...new Set(m.periods.flatMap(r => r.sources.map(s => JSON.stringify(s))))]
+      .map(s => JSON.parse(s));
+    const src = sources.length ? `<div class="src">来源：${sources.map(s => {
+      const label = esc(s.label);
+      const link = s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${label} ↗</a>` : label;
+      const lib = s.in_library && s.id
+        ? ` <a class="src-lib" href="policy-buckets.html#card-${esc(s.id)}" target="_blank" rel="noopener">库</a>`
+        : "";
+      return link + lib + (s.in_library ? "" : ` <span class="pending-chip">待补</span>`);
+    }).join(" · ")}</div>` : "";
+
+    return `<section class="module" id="m-${esc(m.id)}">${head}${table}${notesHtml}${src}</section>`;
+  }).join("");
+}
+
+function periodHtml(p){
+  const parts = String(p).split(" ~ ");
+  if (parts.length === 2){
+    return `<b><span class="pfrom">${esc(parts[0])}</span><span class="pto">~ ${esc(parts[1])}</span></b>`;
+  }
+  return `<b>${esc(p)}</b>`;
+}
+
+function fmtVal(v){
+  const s = String(v ?? "—");
+  // 把「A + B」这类长值拆成主值 + 小字注释，避免一格全是粗体
+  const idx = s.indexOf(" + ");
+  if (idx > 0 && s.length > 28){
+    return `<span class="val"><b>${esc(s.slice(0, idx))}</b><span class="sub">${esc(s.slice(idx + 3))}</span></span>`;
+  }
+  return `<span class="val">${esc(s)}</span>`;
+}
+
+function setupNav(){
+  document.addEventListener("click", e => {
+    const b = e.target.closest("[data-goto]");
+    if (!b) return;
+    const el = document.getElementById("m-" + b.dataset.goto);
+    if (el) el.scrollIntoView({block:"start", behavior:"smooth"});
+  });
+  const btn = id => document.querySelector(`[data-goto="${id}"]`);
+  const obs = new IntersectionObserver(entries => {
+    for (const en of entries){
+      if (!en.isIntersecting) continue;
+      const id = en.target.id.replace("m-", "");
+      $$("#rail button").forEach(b => b.setAttribute("aria-current", String(b.dataset.goto === id)));
+    }
+  }, {rootMargin:"-90px 0px -65% 0px", threshold:0});
+  $$(".module").forEach(m => obs.observe(m));
+}
+
+renderSummary();
+renderRail();
+renderModules();
+setupNav();
+document.querySelectorAll(".table-wrap").forEach(w => {
+  if (w.scrollWidth > w.clientWidth + 2){
+    const h = document.createElement("div");
+    h.className = "scroll-hint";
+    h.textContent = "← 横向滚动看全部列 →";
+    w.after(h);
+  }
+});
+</script>
+</body>
+</html>

@@ -9,8 +9,28 @@
       "files": 1,
       "size_kb": 40,
       "source": "output/analysis/2026-11-10_16家车企2026半年报",
-      "built_at": "2026-11-12T16:25:40"
+      "built_at": "2026-11-12T16:40:45"
+    },
+    {
+      "slug": "2026-11-10-miit-412-413",
+      "title": "工信部 412-413 批公示",
+      "date": "2026-11-10",
+      "note": "批次公示 · 含 PDF",
+      "files": 2,
+      "size_kb": 1092,
+      "source": "output/analysis/2026-11-10_工信部412-413公示",
+      "built_at": "2026-11-12T16:40:45"
+    },
+    {
+      "slug": "policy",
+      "title": "政策信息库 · 条文台账与合规日历",
+      "date": "2026-11-12",
+      "note": "三视图 · 年度 / 分类",
+      "files": 3,
+      "size_kb": 843,
+      "source": "data/datas/policy",
+      "built_at": "2026-11-12T16:40:45"
     }
   ],
-  "built_at": "2026-11-12T16:25:40"
+  "built_at": "2026-11-12T16:40:45"
 }
