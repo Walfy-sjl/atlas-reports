@@ -1,36 +1,59 @@
 {
-  "site_title": "汽车全链路分析 · 报告",
+  "site_title": "Atlas 报告库",
   "entries": [
     {
-      "slug": "2026-11-10-halfyear",
-      "title": "16 家车企 2026 半年报",
-      "date": "2026-11-10",
-      "note": "财报回顾 · 11 页",
-      "files": 1,
-      "size_kb": 40,
-      "source": "output/analysis/2026-11-10_16家车企2026半年报",
-      "built_at": "2026-11-12T16:40:45"
+      "slug": "policy",
+      "title": "政策信息库",
+      "date": "2026-11-12",
+      "note": "",
+      "files": 3,
+      "size_kb": 843,
+      "pages": [
+        {
+          "name": "policy-annual.html",
+          "kb": 32
+        },
+        {
+          "name": "policy-buckets.html",
+          "kb": 459
+        }
+      ],
+      "source": "data/datas/policy",
+      "built_at": "2026-11-12T16:55:59",
+      "group": "政策",
+      "desc": "8 个部委的政策条文台账，附合规日历与按年、按分类两种视图。"
     },
     {
       "slug": "2026-11-10-miit-412-413",
       "title": "工信部 412-413 批公示",
       "date": "2026-11-10",
-      "note": "批次公示 · 含 PDF",
+      "note": "",
       "files": 2,
       "size_kb": 1092,
+      "pages": [
+        {
+          "name": "download.pdf",
+          "kb": 1073
+        }
+      ],
       "source": "output/analysis/2026-11-10_工信部412-413公示",
-      "built_at": "2026-11-12T16:40:45"
+      "built_at": "2026-11-12T16:55:59",
+      "group": "公告",
+      "desc": "第 412、413 批新车公示的车型清单，含原件 PDF。"
     },
     {
-      "slug": "policy",
-      "title": "政策信息库 · 条文台账与合规日历",
-      "date": "2026-11-12",
-      "note": "三视图 · 年度 / 分类",
-      "files": 3,
-      "size_kb": 843,
-      "source": "data/datas/policy",
-      "built_at": "2026-11-12T16:40:45"
+      "slug": "2026-11-10-halfyear",
+      "title": "16 家车企 2026 半年报",
+      "date": "2026-11-10",
+      "note": "",
+      "files": 1,
+      "size_kb": 40,
+      "pages": [],
+      "source": "output/analysis/2026-11-10_16家车企2026半年报",
+      "built_at": "2026-11-12T16:55:59",
+      "group": "分析",
+      "desc": "上险量与营收对照，11 页 deck。"
     }
   ],
-  "built_at": "2026-11-12T16:40:45"
+  "built_at": "2026-11-12T16:55:59"
 }
