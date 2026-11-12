@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<title>2026 年上半年汽车集团财报回顾</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--paper:#fff;--bg:#e9e7ef;--ink:#1f2430;--mid:#5d6675;--faint:#98a0ad;--line:#e6e4ee;
+ --primary:#5b21b6;--neg:#c0392b;--pos:#17795e;--wash:#f7f5fc;--ad:#f0a029;--rest:#d9d3ea}
+body.dark{--paper:#12121a;--bg:#08080c;--ink:#eef0f6;--mid:#9ba3b4;--faint:#6b7280;--line:#2a2a37;
+ --primary:#b79cff;--neg:#ff8b7a;--pos:#5ee0b0;--wash:#1a1a25;--ad:#f6b95c;--rest:#3a3550}
+html,body{background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang SC","Heiti SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+#wrap{width:100%;display:flex;justify-content:center;padding:24px 0;min-height:100vh}
+body.shot #wrap{padding:0}
+#deck{width:1920px;height:1080px;transform-origin:top center;flex:0 0 auto}
+.slide{width:1920px;height:1080px;background:var(--paper);position:relative;display:none;
+ flex-direction:column;padding:56px 96px 56px;overflow:hidden}
+.slide.on{display:flex}
+.hd{display:flex;justify-content:space-between;align-items:baseline;flex:0 0 auto}
+.eno{font-size:13px;letter-spacing:.14em;color:var(--faint);font-weight:700;text-transform:uppercase;margin-left:auto;margin-right:22px}
+.kick{font-size:17px;font-weight:800;letter-spacing:.16em;color:var(--primary);display:flex;align-items:center}
+.kick i{display:inline-block;width:11px;height:11px;background:var(--primary);margin-right:14px;transform:rotate(45deg)}
+.pno{font-size:15px;font-weight:800;letter-spacing:.1em;color:var(--faint);font-variant-numeric:tabular-nums}
+h1{font-size:54px;line-height:1.16;letter-spacing:-1.4px;font-weight:800;margin-top:20px;max-width:1700px;flex:0 0 auto}
+h1 em{font-style:normal;color:var(--primary)} h1 b{color:var(--neg)}
+.sub{font-size:20px;line-height:1.55;color:var(--mid);margin-top:14px;max-width:1660px;flex:0 0 auto}
+.sub b{color:var(--ink);font-weight:700}
+.put{flex:1 1 auto;display:flex;gap:40px;padding-top:20px;min-height:0}
+.main{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.fig svg{width:100%;height:auto;display:block;overflow:visible}
+.cap{font-size:15.5px;color:var(--mid);margin-top:8px;line-height:1.5}
+.cap b{color:var(--ink)}
+.rail{width:470px;flex:0 0 470px;display:flex;flex-direction:column;justify-content:center}
+.put.wide{flex-direction:column;gap:14px}
+.put.wide .main{flex:1 1 auto;justify-content:flex-start}
+.put.wide .rail{width:100%;flex:0 0 auto;flex-direction:row;gap:0;border-top:1px solid var(--line);padding-top:10px}
+.put.wide .stat{flex:1;border-top:0;border-left:1px solid var(--line);padding:6px 20px}
+.put.wide .stat:first-child{border-left:0;padding-left:0}
+.put.wide .stat .n{font-size:38px}
+.put.wide .stat .l{font-size:15px;margin-top:4px}
+.put.wide .stat .x{font-size:12.5px;margin-top:3px}
+.put.wide .fig svg{max-height:560px}
+.stat{padding:16px 0;border-top:1px solid var(--line)}
+.stat:first-child{border-top:0;padding-top:0}
+.stat .n{font-size:50px;font-weight:800;letter-spacing:-2px;line-height:1;color:var(--primary);font-variant-numeric:tabular-nums}
+.stat .n.neg{color:var(--neg)} .stat .n.ink{color:var(--ink)} .stat .n.pos{color:var(--pos)}
+.stat .u{font-size:22px;font-weight:700;margin-left:3px}
+.stat .l{font-size:17.5px;color:var(--ink);margin-top:9px;line-height:1.4;font-weight:600}
+.stat .x{font-size:14px;color:var(--faint);margin-top:6px;line-height:1.45}
+.sum-band{display:flex;gap:0;margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
+.sum-i{flex:1;padding:0 14px;border-left:1px solid var(--line)}
+.sum-i:first-child{border-left:0;padding-left:0}
+.sum-n{font-size:30px;font-weight:800;letter-spacing:-1px;font-variant-numeric:tabular-nums;color:var(--primary)}
+.sum-n.pos{color:var(--pos)} .sum-n.neg{color:var(--neg)} .sum-n.ink{color:var(--ink)}
+.sum-u{font-size:13px;font-weight:700;color:var(--faint);margin-left:3px}
+.sum-l{display:block;font-size:12.5px;color:var(--mid);margin-top:3px}
+.sum-take{margin-top:10px;font-size:14.5px;line-height:1.5;color:var(--mid)}
+.sum-take b{color:var(--ink)}
+.rd-card{border-left:3px solid var(--line);padding-left:16px}
+.rd-h{font-size:20px;font-weight:800;margin-bottom:8px}
+.rd-h.pos{color:var(--pos)} .rd-h.neg{color:var(--neg)} .rd-h.ink{color:var(--primary)}
+.rd-b{font-size:16.5px;line-height:1.62;color:var(--mid)}
+.rd-b b{color:var(--ink);font-weight:700}
+.ft{flex:0 0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;
+ border-top:1px solid var(--line);padding-top:11px;margin-top:10px}
+.fl{font-size:13px;color:var(--faint);line-height:1.6;max-width:1450px}
+.fr{font-size:12.5px;color:var(--faint);letter-spacing:.06em;white-space:nowrap}
+table{border-collapse:collapse;font-size:15.5px;width:100%;font-variant-numeric:tabular-nums}
+table.dense{font-size:13.5px;table-layout:fixed}
+table.dense th,table.dense td{padding:6px 5px;overflow:hidden}
+table.dense td:last-child{text-align:left;color:var(--mid);font-size:12.5px;line-height:1.32;white-space:normal}
+table.dense td.num{font-weight:700}
+table.dense td.pos{color:var(--pos)} table.dense td.neg{color:var(--neg)}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:right}
+th{font-weight:700;color:var(--mid);font-size:13.5px;letter-spacing:.04em;border-bottom:1.5px solid var(--line)}
+td:first-child,th:first-child{text-align:left}
+tr.hl td{background:var(--wash);font-weight:700}
+/* svg 样式 */
+svg .gl{stroke:var(--line);stroke-width:1}
+svg .ax{stroke:var(--mid);stroke-width:1.4}
+svg .ref{stroke:var(--mid);stroke-width:1.2;stroke-dasharray:5 4;opacity:.7}
+svg .ref9{stroke:var(--pos);stroke-width:1.6;stroke-dasharray:7 5;opacity:.85}
+svg .ref0{stroke:var(--neg);stroke-width:1.4;stroke-dasharray:6 4;opacity:.75}
+svg .band{fill:var(--pos);opacity:.06}
+svg .quad{fill:var(--primary);opacity:.05}
+svg .tk{font-size:14px;fill:var(--faint)}
+svg .axl{font-size:15px;fill:var(--mid);font-weight:600}
+svg .pl{font-size:15px;fill:var(--ink);font-weight:600}
+svg .pl.b{font-size:17px}
+svg .pv{font-size:15px;fill:var(--mid);font-weight:700}
+svg .pv.pos{fill:var(--pos)} svg .pv.neg{fill:var(--neg)}
+svg .gm{font-size:13.5px;fill:var(--faint)}
+svg .note{font-size:14px;fill:var(--mid);font-weight:700;opacity:.8}
+svg .p-pos{fill:var(--pos);opacity:.9} svg .p-mid{fill:var(--primary);opacity:.85} svg .p-neg{fill:var(--neg);opacity:.9}
+svg .bar-pos{fill:var(--pos);opacity:.85} svg .bar-neg{fill:var(--neg);opacity:.85}
+svg .bar-ad{fill:var(--ad)} svg .bar-rest{fill:var(--rest)}
+svg .bar-big{fill:var(--primary);opacity:.8}
+#nav{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;
+ background:rgba(20,20,28,.86);color:#fff;padding:8px 14px;border-radius:999px;font-size:14px;
+ font-variant-numeric:tabular-nums;z-index:20;backdrop-filter:blur(8px)}
+#nav button{background:none;border:0;color:#fff;font-size:20px;cursor:pointer;padding:0 6px;line-height:1}
+#nav .idx{letter-spacing:.08em;font-weight:700}
+#tools{position:fixed;top:16px;right:18px;display:flex;gap:6px;z-index:20}
+#tools button{background:rgba(20,20,28,.8);color:#fff;border:0;border-radius:8px;padding:6px 10px;
+ font-size:13px;cursor:pointer;font-family:inherit}
+#tools button.on{background:var(--primary)}
+#bar{position:fixed;top:0;left:0;height:3px;background:var(--primary);width:0;z-index:30;transition:width .2s}
+@media print{
+ body{background:#fff}
+ #wrap{padding:0}
+ #deck{transform:none!important;width:auto;height:auto}
+ .slide{display:flex!important;page-break-after:always;box-shadow:none;width:100%;height:auto;min-height:0}
+ #nav,#tools,#bar{display:none}
+}
+</style></head><body>
+<div id="bar"></div>
+<div id="wrap"><div id="deck">
+<section class="slide">
+  <div class="hd"><div class="kick"><i></i>2026 半年报 · 16 家中国车企</div><div class="pno">00 / 03</div></div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+    <div style="font-size:20px;letter-spacing:.3em;color:var(--faint);font-weight:700">FINANCIAL REVIEW · 2026 H1</div>
+    <div style="font-size:78px;font-weight:800;line-height:1.14;letter-spacing:-2px;margin-top:26px">
+      2026 年上半年<br/><span style="color:var(--primary)">汽车集团财报回顾</span></div>
+    <div style="font-size:26px;line-height:1.6;color:var(--mid);margin-top:34px;max-width:1320px">
+      16 家中国车企 2026 年上半年财报对齐：<b style="color:var(--ink)">8 家赚钱、8 家亏钱</b>，前四家的利润是总净利的 <b style="color:var(--ink)">1.77 倍</b>。<br/>
+      把毛利率和营销率放在同一张图上，行业的分界线是 <b style="color:var(--ink)">9 个百分点的余量</b>。</div>
+    <div style="display:flex;gap:56px;margin-top:52px">
+      <div><div style="font-size:52px;font-weight:800;color:var(--pos)">9<span style="font-size:22px">pct</span></div>
+      <div style="font-size:15px;color:var(--faint);margin-top:6px">余量分界线</div></div>
+      <div><div style="font-size:52px;font-weight:800;color:var(--ink)">16<span style="font-size:22px">家</span></div>
+      <div style="font-size:15px;color:var(--faint);margin-top:6px">A 股 + H 股 + 美股口径</div></div>
+      <div><div style="font-size:52px;font-weight:800;color:var(--neg)">3<span style="font-size:22px">套</span></div>
+      <div style="font-size:15px;color:var(--faint);margin-top:6px">CAS / IFRS / US GAAP</div></div>
+    </div>
+  </div>
+  <footer class="ft"><div class="fl">数据：各公司 2026 年中期报告 / 半年报 / 业绩公告原件（<code>data/ref/filings/</code>），每个数字带页码可回溯。口径：2026 年 1–6 月、合并报表、人民币。</div><div class="fr">auto-atlas · 2026-11-10</div></footer>
+</section><section class="slide">
+  <div class="hd"><div class="kick"><i></i>01 · 总表</div><div class="eno">Half-year at a glance</div><div class="pno">01 / 03</div></div>
+  <h1>2026 上半年，16 家一张表</h1>
+  <div class="sub">余量 = 毛利率 − 营销率；国内上险为交强险终端上牌量（不含出口）。<b>余量 ≥9pct 的 6 家全部盈利，&lt;6pct 的 5 家全部亏损，中间 6–9pct 的 4 家两盈两亏。</b></div>
+  <div class="put wide"><div class="main"><table class="dense">
+      <colgroup><col style="width:5.6%"/><col style="width:5.4%"/><col style="width:4.8%"/><col style="width:4.8%"/><col style="width:5.4%"/><col style="width:4.8%"/><col style="width:4.4%"/><col style="width:4.4%"/><col style="width:4.2%"/><col style="width:5.0%"/><col style="width:5.0%"/><col style="width:4.4%"/><col style="width:4.4%"/><col style="width:39.4%"/></colgroup>
+      <tr><th>公司</th><th>营收<br/>亿元</th><th>营收<br/>同比</th><th>毛利率</th><th>净利<br/>亿元</th><th>净利率</th>
+      <th>研发率</th><th>营销率</th><th>余量<br/>pct</th><th>国内上险<br/>万辆</th><th>上险<br/>同比</th><th>出口<br/>万辆</th><th>出口<br/>占比</th><th>备注</th></tr>
+      <tr><td>比亚迪</td><td class="num ">3,448</td><td class="num ">-7.1%</td><td class="num ">18.8%</td><td class="num pos">+123.2</td><td class="num pos">+3.6%</td><td class="num ">6.8%</td><td class="num ">3.6%</td><td class="num pos">+15.2</td><td class="num ">98.2</td><td class="num ">-37.2%</td><td class="num ">76.9</td><td class="num ">44%</td><td>上险 −37% 但营收只 −7%，出口 76.9 万辆顶住；归母是其余 15 家合计的 1.6 倍</td></tr><tr><td>上汽集团</td><td class="num ">2,986</td><td class="num ">+1.5%</td><td class="num ">12.8%</td><td class="num pos">+51.5</td><td class="num pos">+1.7%</td><td class="num ">2.7%</td><td class="num ">3.3%</td><td class="num pos">+9.5</td><td class="num ">42.7</td><td class="num ">-12.0%</td><td class="num ">48.2</td><td class="num ">53%</td><td>归母 51.5 亿里投资收益 46.6 亿（占 90%）；自主上险 −12%，出口 48.2 万辆占半壁</td></tr><tr><td>吉利汽车</td><td class="num ">1,736</td><td class="num">—</td><td class="num ">17.9%</td><td class="num pos">+90.9</td><td class="num pos">+5.2%</td><td class="num ">5.3%</td><td class="num ">5.7%</td><td class="num pos">+12.2</td><td class="num ">96.0</td><td class="num ">-10.9%</td><td class="num ">47.2</td><td class="num ">33%</td><td>毛利 17.9% + 营销 5.7%，余量 12.2，结构最像「稳态样本」</td></tr><tr><td>奇瑞汽车</td><td class="num ">1,433</td><td class="num">—</td><td class="num ">16.1%</td><td class="num pos">+85.7</td><td class="num pos">+6.0%</td><td class="num ">4.7%</td><td class="num ">4.0%</td><td class="num pos">+12.1</td><td class="num ">44.0</td><td class="num ">-29.1%</td><td class="num ">93.2</td><td class="num ">68%</td><td>净利率 6.0% 全场最高；出口 93.2 万辆占 68%，上险 −29% 不影响利润</td></tr><tr><td>长城汽车</td><td class="num ">1,021</td><td class="num ">+10.6%</td><td class="num ">18.4%</td><td class="num pos">+24.6</td><td class="num pos">+2.4%</td><td class="num ">4.5%</td><td class="num ">5.9%</td><td class="num pos">+12.5</td><td class="num ">26.5</td><td class="num ">-14.4%</td><td class="num ">12.9</td><td class="num ">33%</td><td>唯一「加广告 + 增收 + 增利」：广告 +12.6%、营收 +10.6%、净利 +3.5%</td></tr><tr><td>长安汽车</td><td class="num ">656</td><td class="num ">-9.7%</td><td class="num ">14.5%</td><td class="num pos">+8.2</td><td class="num pos">+1.2%</td><td class="num ">4.8%</td><td class="num ">5.9%</td><td class="num ">+8.6</td><td class="num ">34.4</td><td class="num ">-32.1%</td><td class="num ">15.7</td><td class="num ">31%</td><td>净利 8.2 亿、净利率 1.2%；少数股东还倒亏 6.4 亿，余量 8.6 落在临界带</td></tr><tr><td>北京汽车</td><td class="num ">577</td><td class="num ">-29.9%</td><td class="num ">10.1%</td><td class="num neg">-15.9</td><td class="num neg">-2.8%</td><td class="num">—</td><td class="num ">5.5%</td><td class="num neg">+4.6</td><td class="num ">6.0</td><td class="num ">+21.3%</td><td class="num ">2.6</td><td class="num ">30%</td><td>营收 −29.9%，归母亏 15.9 亿（少数股东倒赚 12.5 亿）；北京奔驰这棵摇钱树开始掉钱</td></tr><tr><td>蔚来</td><td class="num ">577</td><td class="num ">+85.8%</td><td class="num ">18.7%</td><td class="num neg">-12.2</td><td class="num neg">-2.1%</td><td class="num ">7.0%</td><td class="num ">13.7%</td><td class="num neg">+5.0</td><td class="num ">19.6</td><td class="num ">+67.8%</td><td class="num ">0.0</td><td class="num ">0%</td><td>收入 +85.8%、费用双降，归母亏损从上年 51.4 亿收窄到 12.2 亿</td></tr><tr><td>赛力斯</td><td class="num ">575</td><td class="num ">-7.9%</td><td class="num ">23.3%</td><td class="num neg">-17.2</td><td class="num neg">-3.0%</td><td class="num ">6.5%</td><td class="num ">14.7%</td><td class="num ">+8.6</td><td class="num ">16.0</td><td class="num ">+8.5%</td><td class="num ">0.1</td><td class="num ">1%</td><td>毛利 23.3% 最高，但营销 14.7%（93% 是广宣+开店），归母亏 17.2 亿</td></tr><tr><td>理想汽车</td><td class="num ">562</td><td class="num ">+15.5%</td><td class="num ">20.3%</td><td class="num pos">+17.4</td><td class="num pos">+3.1%</td><td class="num ">9.5%</td><td class="num ">9.3%</td><td class="num pos">+11.0</td><td class="num ">19.1</td><td class="num ">-8.0%</td><td class="num ">0.0</td><td class="num ">0%</td><td>研发率 9.5% 最高、营销 9.3% 仍盈利 17.4 亿</td></tr><tr><td>广汽集团</td><td class="num ">465</td><td class="num">—</td><td class="num ">-4.3%</td><td class="num neg">-44.7</td><td class="num neg">-9.6%</td><td class="num">—</td><td class="num ">6.6%</td><td class="num neg">-10.9</td><td class="num ">19.8</td><td class="num ">-26.7%</td><td class="num ">7.1</td><td class="num ">26%</td><td>毛利 −4.3%、归母亏 44.7 亿（合资再亏 14.5 亿）：合资模式失效最直白案例</td></tr><tr><td>小米汽车</td><td class="num ">448</td><td class="num">—</td><td class="num ">19.6%</td><td class="num neg">-57.0</td><td class="num neg">-12.7%</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num ">18.6</td><td class="num ">+17.9%</td><td class="num ">0.0</td><td class="num ">0%</td><td>毛利率 26.4%→19.2%，单车从赚 0.76 万转为亏 2.50 万（分部口径）</td></tr><tr><td>零跑汽车</td><td class="num ">381</td><td class="num ">+57.2%</td><td class="num ">11.7%</td><td class="num pos">+2.1</td><td class="num pos">+0.6%</td><td class="num ">6.1%</td><td class="num ">5.2%</td><td class="num ">+6.5</td><td class="num ">25.9</td><td class="num ">+45.1%</td><td class="num ">9.6</td><td class="num ">27%</td><td>毛利仅 11.7% 仍半年盈利 2.1 亿：费用率贴着毛利走</td></tr><tr><td>小鹏汽车</td><td class="num ">328</td><td class="num ">-3.8%</td><td class="num ">20.6%</td><td class="num neg">-31.2</td><td class="num neg">-9.5%</td><td class="num ">17.8%</td><td class="num ">13.4%</td><td class="num ">+7.2</td><td class="num ">13.4</td><td class="num ">-25.6%</td><td class="num ">3.2</td><td class="num ">19%</td><td>收入 −3.8% 但研发 +39%，亏损扩到 31.2 亿：主动下注</td></tr><tr><td>江淮汽车</td><td class="num ">222</td><td class="num ">+14.3%</td><td class="num ">11.3%</td><td class="num neg">-7.5</td><td class="num neg">-3.4%</td><td class="num ">3.5%</td><td class="num ">5.5%</td><td class="num neg">+5.8</td><td class="num">—</td><td class="num">—</td><td class="num ">3.9</td><td class="num">—</td><td>尊界拉动营收 +14.3% 仍亏 7.5 亿；上险口径不可用</td></tr><tr><td>北汽蓝谷</td><td class="num ">116</td><td class="num">—</td><td class="num ">4.2%</td><td class="num neg">-19.4</td><td class="num neg">-16.7%</td><td class="num">—</td><td class="num ">13.0%</td><td class="num neg">-8.8</td><td class="num ">8.4</td><td class="num ">+35.6%</td><td class="num ">0.0</td><td class="num ">0%</td><td>净利率 −16.7%，广告费翻倍，余量 −8.8 全场最差</td></tr>
+      <tr style="border-top:2px solid var(--ink)"><td><b>16 家合计</b></td><td class="num"><b>15,531</b></td><td>—</td><td>—</td><td class="num"><b>+199</b></td><td class="num"><b>+1.28%</b></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td style="text-align:left;color:var(--mid);font-size:12.5px">8 家盈利 / 8 家亏损</td></tr>
+    </table>
+    <div class="sum-band">
+      <div class="sum-i"><span class="sum-n">15,531</span><span class="sum-u">亿</span><span class="sum-l">16 家营收合计</span></div>
+      <div class="sum-i"><span class="sum-n">199</span><span class="sum-u">亿</span><span class="sum-l">净利合计（净利率 1.28%）</span></div>
+      <div class="sum-i"><span class="sum-n pos">+404</span><span class="sum-u">亿</span><span class="sum-l">8 家盈利合计</span></div>
+      <div class="sum-i"><span class="sum-n neg">-205</span><span class="sum-u">亿</span><span class="sum-l">8 家亏损合计</span></div>
+      <div class="sum-i"><span class="sum-n ink">+351</span><span class="sum-u">亿</span><span class="sum-l">前四名 = 总净利的 177%</span></div>
+      <div class="sum-i"><span class="sum-n neg">-153</span><span class="sum-u">亿</span><span class="sum-l">其余 12 家（4 家盈 +52 / 8 家亏 -205）</span></div>
+    </div>
+    <div class="sum-take"><b>全行业的后 3/4 都是薄利或者亏损。</b></div>
+    </div></div>
+  <footer class="ft"><div class="fl">口径：A 股=CAS 半年报，港股=IFRS 中报，蔚来/小鹏=US GAAP，小米=分部数据；<b>净利 = 归母净利（16 家同口径）</b>，净利率 = 归母净利 ÷ 合并营收；毛利率/研发率/营销率仍为合并口径。上险取自 data/datas/sales/insurance，按公司并表品牌映射。</div><div class="fr">auto-atlas · 2026-11-10</div></footer>
+</section><section class="slide">
+  <div class="hd"><div class="kick"><i></i>02 · 三张面孔</div><div class="eno">Profit · Margin · ATP</div><div class="pno">02 / 03</div></div>
+  <h1>利润、利润率、ATP：<em>三者并不同向</em></h1>
+  <div class="sub">赚钱最多的卖得不算贵（比亚迪 15.7 万、净利 123 亿）；卖得最贵的不一定赚钱（赛力斯 35.7 万、归母亏 17.2 亿）。<b>长城剔除零部件后只有 15.4 万</b>。</div>
+  <div class="put wide"><div class="main"><div class="fig"><svg viewBox="0 0 1720 640"><text class="pl b" x="132" y="24" text-anchor="start">净利</text><text class="tk" x="132" y="39" text-anchor="start">亿元</text><text class="pl b" x="602" y="24" text-anchor="start">净利率</text><text class="tk" x="602" y="39" text-anchor="start">%</text><text class="pl b" x="1032" y="24" text-anchor="start">ATP 单车营收</text><text class="tk" x="1032" y="39" text-anchor="start">万元/辆 = 营收 ÷ 公司披露销量</text><line class="ax" x1="265.3" y1="40" x2="265.3" y2="630"/><line class="ax" x1="882.0" y1="40" x2="882.0" y2="630"/><text class="pl" x="120" y="63.4" text-anchor="end">比亚迪</text><rect class="bar-pos" x="265.3" y="47.4" width="234.8" height="22.1" rx="2"/><text class="pv" x="505.1" y="62.4" text-anchor="start">+123.2</text><rect class="bar-pos" x="882.0" y="47.4" width="35.7" height="22.1" rx="2"/><text class="pv" x="922.7" y="62.4" text-anchor="start">+3.6%</text><rect class="bar-big" x="1032.0" y="47.4" width="157.0" height="22.1" rx="2"/><text class="pv" x="1194.0" y="62.4">15.7 万</text><text class="pl" x="120" y="100.3" text-anchor="end">吉利汽车</text><rect class="bar-pos" x="265.3" y="84.2" width="173.2" height="22.1" rx="2"/><text class="pv" x="443.5" y="99.3" text-anchor="start">+90.9</text><rect class="bar-pos" x="882.0" y="84.2" width="52.4" height="22.1" rx="2"/><text class="pv" x="939.4" y="99.3" text-anchor="start">+5.2%</text><rect class="bar-big" x="1032.0" y="84.2" width="122.0" height="22.1" rx="2"/><text class="pv" x="1159.0" y="99.3">12.2 万</text><text class="pl" x="120" y="137.2" text-anchor="end">奇瑞汽车</text><rect class="bar-pos" x="265.3" y="121.1" width="163.2" height="22.1" rx="2"/><text class="pv" x="433.5" y="136.2" text-anchor="start">+85.7</text><rect class="bar-pos" x="882.0" y="121.1" width="59.8" height="22.1" rx="2"/><text class="pv" x="946.8" y="136.2" text-anchor="start">+6.0%</text><rect class="bar-big" x="1032.0" y="121.1" width="94.0" height="22.1" rx="2"/><text class="pv" x="1131.0" y="136.2">9.4 万</text><text class="pl" x="120" y="174.1" text-anchor="end">上汽集团</text><rect class="bar-pos" x="265.3" y="158.0" width="98.1" height="22.1" rx="2"/><text class="pv" x="368.5" y="173.1" text-anchor="start">+51.5</text><rect class="bar-pos" x="882.0" y="158.0" width="17.3" height="22.1" rx="2"/><text class="pv" x="904.3" y="173.1" text-anchor="start">+1.7%</text><text class="tk" x="1032.0" y="173.1">— 营收含华域零部件，销量含上汽大众/通用（不并表）</text><text class="pl" x="120" y="210.9" text-anchor="end">长城汽车</text><rect class="bar-pos" x="265.3" y="194.9" width="47.0" height="22.1" rx="2"/><text class="pv" x="317.3" y="209.9" text-anchor="start">+24.6</text><rect class="bar-pos" x="882.0" y="194.9" width="24.1" height="22.1" rx="2"/><text class="pv" x="911.1" y="209.9" text-anchor="start">+2.4%</text><rect class="bar-big" x="1032.0" y="194.9" width="154.0" height="22.1" rx="2"/><text class="pv" x="1191.0" y="209.9">15.4 万</text><text class="pl" x="120" y="247.8" text-anchor="end">理想汽车</text><rect class="bar-pos" x="265.3" y="231.8" width="33.2" height="22.1" rx="2"/><text class="pv" x="303.5" y="246.8" text-anchor="start">+17.4</text><rect class="bar-pos" x="882.0" y="231.8" width="31.0" height="22.1" rx="2"/><text class="pv" x="918.0" y="246.8" text-anchor="start">+3.1%</text><rect class="bar-big" x="1032.0" y="231.8" width="294.0" height="22.1" rx="2"/><text class="pv" x="1331.0" y="246.8">29.4 万</text><text class="pl" x="120" y="284.7" text-anchor="end">长安汽车</text><rect class="bar-pos" x="265.3" y="268.6" width="15.6" height="22.1" rx="2"/><text class="pv" x="285.9" y="283.7" text-anchor="start">+8.2</text><rect class="bar-pos" x="882.0" y="268.6" width="12.4" height="22.1" rx="2"/><text class="pv" x="899.4" y="283.7" text-anchor="start">+1.2%</text><text class="tk" x="1032.0" y="283.7">— 销量含合资品牌，其收入不并表</text><text class="pl" x="120" y="321.6" text-anchor="end">零跑汽车</text><rect class="bar-pos" x="265.3" y="305.5" width="4.0" height="22.1" rx="2"/><text class="pv" x="274.3" y="320.6" text-anchor="start">+2.1</text><rect class="bar-pos" x="882.0" y="305.5" width="5.5" height="22.1" rx="2"/><text class="pv" x="892.5" y="320.6" text-anchor="start">+0.6%</text><rect class="bar-big" x="1032.0" y="305.5" width="107.0" height="22.1" rx="2"/><text class="pv" x="1144.0" y="320.6">10.7 万</text><text class="pl" x="120" y="358.4" text-anchor="end">江淮汽车</text><rect class="bar-neg" x="251.1" y="342.4" width="14.3" height="22.1" rx="2"/><text class="pv" x="271.3" y="357.4" text-anchor="start">-7.5</text><rect class="bar-neg" x="848.2" y="342.4" width="33.8" height="22.1" rx="2"/><text class="pv" x="888.0" y="357.4" text-anchor="start">-3.4%</text><rect class="bar-big" x="1032.0" y="342.4" width="129.0" height="22.1" rx="2"/><text class="pv" x="1166.0" y="357.4">12.9 万</text><text class="pl" x="120" y="395.3" text-anchor="end">蔚来</text><rect class="bar-neg" x="242.1" y="379.2" width="23.2" height="22.1" rx="2"/><text class="pv" x="271.3" y="394.3" text-anchor="start">-12.2</text><rect class="bar-neg" x="860.9" y="379.2" width="21.1" height="22.1" rx="2"/><text class="pv" x="888.0" y="394.3" text-anchor="start">-2.1%</text><rect class="bar-big" x="1032.0" y="379.2" width="294.0" height="22.1" rx="2"/><text class="pv" x="1331.0" y="394.3">29.4 万</text><text class="pl" x="120" y="432.2" text-anchor="end">北京汽车</text><rect class="bar-neg" x="235.0" y="416.1" width="30.4" height="22.1" rx="2"/><text class="pv" x="271.3" y="431.2" text-anchor="start">-15.9</text><rect class="bar-neg" x="854.4" y="416.1" width="27.6" height="22.1" rx="2"/><text class="pv" x="888.0" y="431.2" text-anchor="start">-2.8%</text><text class="tk" x="1032.0" y="431.2">— 收入未拆分，销量含北京现代（不并表）</text><text class="pl" x="120" y="469.1" text-anchor="end">赛力斯</text><rect class="bar-neg" x="232.6" y="453.0" width="32.7" height="22.1" rx="2"/><text class="pv" x="271.3" y="468.1" text-anchor="start">-17.2</text><rect class="bar-neg" x="852.1" y="453.0" width="29.9" height="22.1" rx="2"/><text class="pv" x="888.0" y="468.1" text-anchor="start">-3.0%</text><rect class="bar-big" x="1032.0" y="453.0" width="357.0" height="22.1" rx="2"/><text class="pv" x="1394.0" y="468.1">35.7 万</text><text class="pl" x="120" y="505.9" text-anchor="end">北汽蓝谷</text><rect class="bar-neg" x="228.4" y="489.9" width="36.9" height="22.1" rx="2"/><text class="pv" x="271.3" y="504.9" text-anchor="start">-19.4</text><rect class="bar-neg" x="714.9" y="489.9" width="167.1" height="22.1" rx="2"/><text class="pv" x="888.0" y="504.9" text-anchor="start">-16.7%</text><rect class="bar-big" x="1032.0" y="489.9" width="117.0" height="22.1" rx="2"/><text class="pv" x="1154.0" y="504.9">11.7 万</text><text class="pl" x="120" y="542.8" text-anchor="end">小鹏汽车</text><rect class="bar-neg" x="205.9" y="526.8" width="59.4" height="22.1" rx="2"/><text class="pv" x="271.3" y="541.8" text-anchor="start">-31.2</text><rect class="bar-neg" x="786.8" y="526.8" width="95.2" height="22.1" rx="2"/><text class="pv" x="888.0" y="541.8" text-anchor="start">-9.5%</text><rect class="bar-big" x="1032.0" y="526.8" width="197.0" height="22.1" rx="2"/><text class="pv" x="1234.0" y="541.8">19.7 万</text><text class="pl" x="120" y="579.7" text-anchor="end">广汽集团</text><rect class="bar-neg" x="180.2" y="563.6" width="85.1" height="22.1" rx="2"/><text class="pv" x="271.3" y="578.7" text-anchor="start">-44.7</text><rect class="bar-neg" x="785.9" y="563.6" width="96.1" height="22.1" rx="2"/><text class="pv" x="888.0" y="578.7" text-anchor="start">-9.6%</text><rect class="bar-big" x="1032.0" y="563.6" width="92.0" height="22.1" rx="2"/><text class="pv" x="1129.0" y="578.7">9.2 万</text><text class="pl" x="120" y="616.6" text-anchor="end">小米汽车</text><rect class="bar-neg" x="156.8" y="600.5" width="108.6" height="22.1" rx="2"/><text class="pv" x="271.3" y="615.6" text-anchor="start">-57.0</text><rect class="bar-neg" x="754.8" y="600.5" width="127.2" height="22.1" rx="2"/><text class="pv" x="888.0" y="615.6" text-anchor="start">-12.7%</text><rect class="bar-big" x="1032.0" y="600.5" width="241.0" height="22.1" rx="2"/><text class="pv" x="1278.0" y="615.6">24.1 万</text><line class="gl" x1="132" y1="36" x2="132" y2="630"/><line class="gl" x1="602" y1="36" x2="602" y2="630"/><line class="gl" x1="1032" y1="36" x2="1032" y2="630"/></svg></div>
+    <div class="cap">按净利排序。<b>分子用整车/汽车业务收入，分母用公司公告总销量</b>。比亚迪扣手机部件 694 亿（否则算出 19.7 万）、长城扣零部件及其他 132.9 亿（否则 25.9 万）。广汽、江淮、北汽蓝谷改用<b>财报披露销量</b>补算（9.2 / 12.9 / 11.7 万）。长安、上汽、北京汽车不计算——销量里含不并表的合资品牌，分子分母覆盖的公司不一样。</div></div>
+    <aside class="rail">
+      <div class="stat"><div class="n neg">35.7<span class="u">万</span></div><div class="l">ATP 最高：赛力斯</div><div class="x">净利率 −3.8%：最厚的毛利付给了渠道</div></div>
+      <div class="stat"><div class="n neg">9.2<span class="u">万</span></div><div class="l">ATP 最低：广汽集团</div><div class="x">整车毛利 −8.79%：卖得最便宜，也亏得最狠</div></div>
+      <div class="stat"><div class="n ink">15.7<span class="u">万</span></div><div class="l">比亚迪 ATP</div><div class="x">只含汽车业务 2,753 亿 ÷ 175 万辆</div></div>
+    </aside></div>
+  <footer class="ft"><div class="fl">净利均为归母口径（港股=本公司权益持有人应占溢利，美股=归属普通股股东）。ATP 的分子分母必须同口径：分子用整车/汽车业务收入（比亚迪扣手机部件 694 亿、长城扣零部件及其他 132.9 亿、奇瑞扣零部件 100.4 亿），分母优先用公司公告总销量（长城 57.58 万辆、吉利 142.30 万辆），拿不到才用「上险+出口」近似。财报另有销量披露的改用财报数：广汽 318.31 亿 ÷ 34.60 万辆（p27/p4）、江淮 221.8 亿 ÷ 17.24 万辆（p9）、北汽蓝谷 116.0 亿 ÷ 9.89 万辆（p9）。三家不计算：长安（111.9 万辆含合资，p8）、上汽（批售 204.5 万辆含上汽大众/通用、营收含华域，p7）、北京汽车（批发 32.89 万辆含北京现代，p11）。</div><div class="fr">auto-atlas · 2026-11-10</div></footer>
+</section><section class="slide">
+  <div class="hd"><div class="kick"><i></i>03 · 五种活法</div><div class="eno">Five Business Models</div><div class="pno">03 / 03</div></div>
+  <h1>16 家，<em>16 种活法</em></h1>
+  <div class="sub">毛利高低决定「能不能活」，费用结构决定「怎么活」：<b>效率型在压成本、收租型在收股权、渠道型在交租、投入型在下注、崩坏型在失血</b>。</div>
+  <div class="put wide"><div class="main">
+      <table class="dense" style="font-size:18px">
+        <tr><th style="width:10%">公司</th><th style="width:7%">类型</th>
+        <th style="width:7.5%">毛利</th><th style="width:7.5%">营销</th><th style="width:7.5%">研发</th>
+        <th style="width:8.5%">净利</th><th style="text-align:left;padding-left:18px">这一家在怎么活</th></tr>
+        <tr><td style="font-weight:700">比亚迪</td><td rowspan="6" class="pos" style="font-weight:800;border-left:3px solid var(--line);vertical-align:middle">效率型</td><td>18.8%</td><td>3.6%</td><td>6.8%</td><td class="pos">+123.2</td><td style="text-align:left;color:var(--mid);padding-left:18px">垂直整合把毛利做到 18.8%，营销只花 3.6%——规模本身就是护城河</td></tr><tr><td style="font-weight:700">吉利</td><td>17.9%</td><td>5.7%</td><td>5.3%</td><td class="pos">+90.9</td><td style="text-align:left;color:var(--mid);padding-left:18px">最像模板的一家：毛利 17.9、营销 5.7，余量 12.2，不多不少</td></tr><tr><td style="font-weight:700">奇瑞</td><td>16.1%</td><td>4.0%</td><td>4.7%</td><td class="pos">+85.7</td><td style="text-align:left;color:var(--mid);padding-left:18px">出口占 68%，用海外毛利养国内价格战，净利率反而全场最高</td></tr><tr><td style="font-weight:700">长城</td><td>18.4%</td><td>5.9%</td><td>4.5%</td><td class="pos">+24.6</td><td style="text-align:left;color:var(--mid);padding-left:18px">全场唯一「加广告 + 增收 + 增利」：广告 +12.6%、营收 +10.6%、净利 +3.5%</td></tr><tr><td style="font-weight:700">长安</td><td>14.5%</td><td>5.9%</td><td>4.8%</td><td class="pos">+8.2</td><td style="text-align:left;color:var(--mid);padding-left:18px">毛利刚够覆盖费用，余量 8.6 落在临界带；净利 8.2 亿、净利率 1.2%</td></tr><tr><td style="font-weight:700">零跑</td><td>11.7%</td><td>5.2%</td><td>6.1%</td><td class="pos">+2.1</td><td style="text-align:left;color:var(--mid);padding-left:18px">毛利只有 11.7% 也赚钱：研发 + 营销 11.3%，贴着毛利走</td></tr><tr><td style="font-weight:700">上汽</td><td rowspan="2" class="ink" style="font-weight:800;border-left:3px solid var(--line);vertical-align:middle">收租型</td><td>12.8%</td><td>3.3%</td><td>2.7%</td><td class="pos">+51.5</td><td style="text-align:left;color:var(--mid);padding-left:18px">归母 51.5 亿里投资收益占 46.6 亿（90%）——不投研发、不打广告，靠合资股权收钱</td></tr><tr><td style="font-weight:700">北京汽车</td><td>10.1%</td><td>5.5%</td><td>—</td><td class="neg">-15.9</td><td style="text-align:left;color:var(--mid);padding-left:18px">租金转负：归母亏 15.9 亿、权益法份额 −4.26 亿，北京奔驰也开始掉钱</td></tr><tr><td style="font-weight:700">赛力斯</td><td rowspan="3" class="neg" style="font-weight:800;border-left:3px solid var(--line);vertical-align:middle">渠道型</td><td>23.3%</td><td>14.7%</td><td>6.5%</td><td class="neg">-17.2</td><td style="text-align:left;color:var(--mid);padding-left:18px">毛利全场最高 23.3%，14.7% 交给渠道（93% 是广宣 + 开店），毛利没留在自己口袋</td></tr><tr><td style="font-weight:700">蔚来</td><td>18.7%</td><td>13.7%</td><td>7.0%</td><td class="neg">-12.2</td><td style="text-align:left;color:var(--mid);padding-left:18px">直营 + 换电是固定成本：收入 +85.8%，营销 13.7% 仍压不平</td></tr><tr><td style="font-weight:700">江淮</td><td>11.3%</td><td>5.5%</td><td>3.5%</td><td class="neg">-7.5</td><td style="text-align:left;color:var(--mid);padding-left:18px">尊界代工：品牌与渠道都在华为手里，毛利只剩 11.3%，营收 +14.3% 仍亏</td></tr><tr><td style="font-weight:700">理想</td><td rowspan="3" class="primary" style="font-weight:800;border-left:3px solid var(--line);vertical-align:middle">投入型</td><td>20.3%</td><td>9.3%</td><td>9.5%</td><td class="pos">+17.4</td><td style="text-align:left;color:var(--mid);padding-left:18px">唯一跑通的投入型：研发 9.5%、营销 9.3%，仍然盈利；且零出口、国内上险 −8.0%</td></tr><tr><td style="font-weight:700">小米</td><td>19.6%</td><td>—</td><td>—</td><td class="neg">-57.0</td><td style="text-align:left;color:var(--mid);padding-left:18px">汽车分部毛利率 26.4%→19.2%，单车从赚 0.76 万转为亏 2.50 万（分部口径）</td></tr><tr><td style="font-weight:700">小鹏</td><td>20.6%</td><td>13.4%</td><td>17.8%</td><td class="neg">-31.2</td><td style="text-align:left;color:var(--mid);padding-left:18px">研发率 17.8% 全表最高、比毛利率只低 2.8pp——不是失控，是主动下注</td></tr><tr><td style="font-weight:700">广汽</td><td rowspan="2" class="neg" style="font-weight:800;border-left:3px solid var(--line);vertical-align:middle">崩坏型</td><td>−4.3%</td><td>6.6%</td><td>—</td><td class="neg">-44.7</td><td style="text-align:left;color:var(--mid);padding-left:18px">整车毛利 −8.79%，卖一辆亏一辆；营销还花 6.6%，合资利润不再回补</td></tr><tr><td style="font-weight:700">北汽蓝谷</td><td>4.2%</td><td>13.0%</td><td>—</td><td class="neg">-19.4</td><td style="text-align:left;color:var(--mid);padding-left:18px">毛利 4.2% 却花 13% 做营销，净利率 −16.7% 全场最差</td></tr>
+      </table>
+      <div class="cap" style="margin-top:14px;font-size:15.5px"><span class="pos" style="font-weight:800">效率型 6</span>　·　<span class="ink" style="font-weight:800">收租型 2</span>　·　<span class="neg" style="font-weight:800">渠道型 3</span>　·　<span class="primary" style="font-weight:800">投入型 3</span>　·　<span class="neg" style="font-weight:800">崩坏型 2</span><b>　—— 16 家，一家不落。</b></div>
+      <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:17px;line-height:1.55;color:var(--mid)">
+        <b style="color:var(--ink)">类型只是标签，真正的分界是余量（毛利 − 营销）：</b>
+        余量 ≥9pct 的 6 家全部盈利，&lt;6pct 的 5 家全部亏损；
+        中间 6–9pct 的 4 家两盈两亏（长安 8.6 赚、赛力斯 8.6 亏、小鹏 7.2 亏、零跑 6.5 赚）——
+        <b style="color:var(--ink)">生死线不在类型里，就在这 3 个点里。</b></div>
+    </div></div>
+  <footer class="ft"><div class="fl">毛利/营销/研发为 2026H1 合并口径（研发率 = 研发费用 ÷ 营收；小米为汽车分部，销研费用未单独披露）。分类依据是「利润从哪来」，不是毛利率高低：上汽归母 51.5 亿里投资收益占 46.6 亿（90%），故归收租型而非效率型。净利均为归母口径。</div><div class="fr">auto-atlas · 2026-11-10</div></footer>
+</section>
+</div></div>
+<div id="nav">
+  <button data-act="prev" title="上一页">‹</button>
+  <span class="idx" id="idx">01 / 14</span>
+  <button data-act="next" title="下一页">›</button>
+</div>
+<div id="tools">
+  <button data-act="out" title="缩小">−</button>
+  <button data-act="in" title="放大">＋</button>
+  <button data-act="width" title="适宽">适宽</button>
+  <button data-act="page" title="整页">整页</button>
+  <button data-act="dark" title="暗色">暗色</button>
+  <button data-act="fs" title="全屏">全屏</button>
+  <button data-act="pdf" class="pri" title="打印 / 导出 PDF">PDF</button>
+</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const deck=document.getElementById('deck'),wrap=document.getElementById('wrap');
+const idxEl=document.getElementById('idx'),bar=document.getElementById('bar');
+let cur=0,mode='page',zoom=1;
+function show(i){
+  cur=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach((s,k)=>s.classList.toggle('on',k===cur));
+  idxEl.textContent=String(cur+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+  bar.style.width=((cur+1)/slides.length*100)+'%';
+  fit();
+}
+function fit(){
+  const availW=window.innerWidth-56, availH=window.innerHeight-56;
+  let s;
+  if(mode==='page') s=Math.min(availW/1920,availH/1080);
+  else if(mode==='width') s=availW/1920;
+  else s=zoom;
+  if(mode!=='manual') zoom=s;
+  deck.style.transform='scale('+s+')';
+  wrap.style.height=(1080*s+48)+'px';
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();show(cur+1);}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(cur-1);}
+  if(e.key==='Home')show(0);
+  if(e.key==='End')show(slides.length-1);
+});
+document.querySelectorAll('[data-act]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const a=b.dataset.act;
+    if(a==='prev')show(cur-1);
+    else if(a==='next')show(cur+1);
+    else if(a==='page'){mode='page';mark('page');fit();}
+    else if(a==='width'){mode='width';mark('width');fit();}
+    else if(a==='in'){mode='manual';zoom=Math.min(1.6,zoom+0.1);mark('');fit();}
+    else if(a==='out'){mode='manual';zoom=Math.max(0.32,zoom-0.1);mark('');fit();}
+    else if(a==='dark'){document.body.classList.toggle('dark');b.classList.toggle('on');}
+    else if(a==='fs'){if(document.fullscreenElement)document.exitFullscreen();
+      else document.documentElement.requestFullscreen();}
+    else if(a==='pdf'){window.print();}
+  });
+});
+function mark(m){document.querySelectorAll('[data-act=page],[data-act=width]').forEach(b=>{
+  b.classList.toggle('on',b.dataset.act===m);});}
+window.addEventListener('resize',fit);
+const q=new URLSearchParams(location.search);
+if(q.has('s')){document.body.classList.add('shot');mode='manual';zoom=parseFloat(q.get('s'));}
+show(q.has('p')?parseInt(q.get('p'),10)-1:0);mark('page');
+</script>
+</body></html>
