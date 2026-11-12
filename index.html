@@ -41,7 +41,9 @@ nav a.on{background:var(--accent-soft);color:var(--accent);font-weight:650;borde
 .main{flex:1 1 auto;min-width:0;padding:52px 56px 120px}
 .pane{display:none;max-width:760px}
 #overview{display:block}
-body:has(.pane:target) #overview{display:none}
+/* 有 target 时藏总览 —— 但 #overview 自己也是 .pane，被点中时必须留住，
+   否则 #overview 会被这条规则连带藏掉，点「总览」得到一张空白页 */
+body:has(.pane:target) #overview:not(:target){display:none}
 .pane:target{display:block}
 
 h1{font-size:25px;font-weight:750;letter-spacing:-.5px;line-height:1.35}
@@ -93,6 +95,7 @@ h1{font-size:25px;font-weight:750;letter-spacing:-.5px;line-height:1.35}
 }
 
 body:not(:has(.pane:target)) nav a[href='#overview']{background:var(--accent-soft);color:var(--accent);font-weight:650;border-color:var(--line)}
+body:has([id='overview']:target) nav a[href='#overview']{background:var(--accent-soft);color:var(--accent);font-weight:650;border-color:var(--line)}
 body:has([id='policy']:target) nav a[href='#policy']{background:var(--accent-soft);color:var(--accent);font-weight:650;border-color:var(--line)}
 body:has([id='policy']:target) nav a[href='#policy'] em{color:var(--accent);opacity:.75}
 body:has([id='2026-11-10-miit-412-413']:target) nav a[href='#2026-11-10-miit-412-413']{background:var(--accent-soft);color:var(--accent);font-weight:650;border-color:var(--line)}
