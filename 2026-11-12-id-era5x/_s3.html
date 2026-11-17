@@ -1,0 +1,135 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ --page:#e8e9ee; --slide-bg:#fff; --slide-bg-2:#fff;
+ --fg:#14161c; --ink2:#1f2430; --ink3:#4b5563; --muted:#6b7280;
+ --line:#e3e7ee; --line2:#e2e4ea; --card:#fcfcfe; --card2:#f2f7ff;
+ --zebra:#fafbfc; --self:#e3edfd;
+ --accent:#1d4ed8; --accent-ink:#fff; --gold:#f0c33c;
+ --warn:#b45309; --warn-bg:#fef3c7; --ok:#166534; --ok-bg:#dcfce7;
+ --bad:#991b1b; --bad-bg:#fef2f2; --chip-bg:#eef0f5; --chip-ink:#374151;
+ --buy-bg:#eef2ff; --teal:#0f766e; --teal-bg:#ccfbf1;
+ --shadow:0 10px 26px rgba(29,78,216,.10);
+ background:var(--page); overflow-x:hidden;
+ font:16px/1.5 -apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+ color:var(--fg); -webkit-font-smoothing:antialiased}
+body.mode-dark{
+ --page:#070b12; --slide-bg:linear-gradient(145deg,#0b1526 0%,#122238 55%,#17304d 100%);
+ --slide-bg-2:linear-gradient(145deg,#0b1526 0%,#122238 55%,#17304d 100%);
+ --fg:#eef2f8; --ink2:#dbe3ee; --ink3:#a9b6c8; --muted:#8b99ab;
+ --line:rgba(255,255,255,.14); --line2:rgba(255,255,255,.18);
+ --card:rgba(255,255,255,.045); --card2:rgba(240,195,60,.10);
+ --zebra:rgba(255,255,255,.04); --self:rgba(240,195,60,.12);
+ --accent:#f0c33c; --accent-ink:#231a08;
+ --warn:#fbbf24; --warn-bg:rgba(251,191,36,.14); --ok:#4ade80; --ok-bg:rgba(74,222,128,.14);
+ --bad:#f87171; --bad-bg:rgba(248,113,113,.14); --chip-bg:rgba(255,255,255,.07); --chip-ink:#cfd8e3;
+ --buy-bg:rgba(240,195,60,.10); --teal:#5eead4; --teal-bg:rgba(94,234,212,.12);
+ --shadow:0 10px 26px rgba(0,0,0,.45)}
+#wrap{margin:0 auto;padding:24px 0}
+#stage{width:1920px;transform-origin:top left;display:flex;flex-direction:column;gap:24px}
+.slide{width:1920px;height:1080px;background:var(--slide-bg);position:relative;overflow:hidden;
+ display:flex;flex-direction:column;color:var(--fg)}
+.slide.dark{background:var(--slide-bg-2)}
+.pad{padding:46px 60px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;
+ border-bottom:3px solid currentColor;padding-bottom:14px}
+.h1{font-size:50px;font-weight:800;letter-spacing:-1px;line-height:1.1}
+.h1 em{font-style:normal;color:var(--accent)}
+.sub{margin-top:8px;font-size:18px;font-weight:700;line-height:1.35;max-width:1180px}
+.sub b{color:var(--accent);margin-right:8px;font-weight:800}
+.sub2{margin-top:5px;font-size:12.8px;color:var(--muted);line-height:1.5}
+.badge{display:inline-block;padding:5px 14px;border-radius:999px;background:var(--gold);color:#231a08;
+ font-size:16px;font-weight:700;margin-right:10px}
+.legend{font-size:15px;opacity:.7;text-align:right;line-height:1.7}
+.rules{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:5px 22px;
+ font-size:13.2px;line-height:1.45;color:var(--muted)}
+.rules b{color:var(--accent);font-weight:700}
+.rules i{font-style:normal;opacity:.55;margin-right:5px}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px;flex:1;min-height:0}
+.tier{border:2px solid var(--line2);border-radius:14px;padding:12px 13px 10px;display:flex;
+ flex-direction:column;background:var(--card);min-height:0}
+.tier.hot{border-color:var(--accent);background:var(--card2);box-shadow:var(--shadow)}
+.tier .nm{font-size:16.5px;font-weight:700;color:var(--ink3);line-height:1.25;min-height:20px}
+.tier .pick{display:inline-block;margin-left:7px;padding:1px 7px;border-radius:999px;
+ background:var(--accent);color:var(--accent-ink);font-size:11.5px;font-weight:700;vertical-align:middle}
+.tier .pr{font-size:40px;font-weight:800;color:var(--accent);letter-spacing:-1.5px;line-height:1.05;margin-top:4px}
+.tier .pr small{font-size:16px;font-weight:700;margin-left:2px}
+.tier .deal{font-size:13px;font-weight:700;color:var(--ok);background:var(--ok-bg);border-radius:6px;
+ padding:2px 8px;display:inline-block;margin-top:5px;align-self:flex-start}
+.tier .dlrow{display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap}
+.tier .dl{font-size:13.5px;font-weight:700;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:2px 8px}
+.tier .pw{font-size:12px;font-weight:700;color:var(--teal);background:var(--teal-bg);border-radius:6px;padding:2px 7px}
+.tier .sen{margin-top:6px;font-size:12.8px;line-height:1.4;color:var(--ink2);font-weight:600;
+ background:var(--buy-bg);border-left:3px solid var(--accent);padding:5px 8px;border-radius:0 6px 6px 0}
+.tier .spec{margin-top:4px;font-size:12.2px;line-height:1.42;color:var(--ink3)}
+.tier .spec b{color:var(--muted);font-weight:700;margin-right:5px;font-size:11px;letter-spacing:.3px}
+.tier .gain{margin-top:4px}
+.tier .gl{font-size:11.2px;letter-spacing:.5px;color:var(--ink3);margin-bottom:3px;font-weight:700}
+.tier em{font-style:normal;display:inline-block;font-size:11.5px;font-weight:700;padding:1px 5px;
+ border-radius:5px;margin:0 3px 2px 0;line-height:1.26;background:var(--warn-bg);color:var(--warn)}
+.tier em.n{background:var(--chip-bg);color:var(--chip-ink);font-weight:600}
+.tier em.c{background:var(--bad-bg);color:var(--bad)}
+.tier em.none{background:transparent;color:var(--muted);font-weight:500;padding-left:0}
+.tier .share{margin-top:auto;padding-top:7px;border-top:1px dashed var(--line2);font-size:12.6px;color:var(--muted)}
+.tier .share b{font-size:15px;color:var(--accent);font-weight:800;margin:0 3px}
+.foot{display:grid;grid-template-columns:1.35fr .95fr .9fr;gap:14px;margin-top:14px}
+.foot.f4{grid-template-columns:1.1fr .66fr .72fr 1.02fr;gap:11px}
+.offis{display:flex;flex-direction:column;gap:5px}
+.offi{font-size:12.2px;line-height:1.36;color:var(--ink2)}
+.offi::before{content:'·';color:var(--accent);font-weight:800;margin-right:5px}
+.card{border:1px solid var(--line2);border-radius:12px;padding:12px 14px;background:var(--card)}
+.card h3{font-size:15px;margin-bottom:7px;color:var(--accent);display:flex;align-items:center;gap:8px}
+.card h3 i{width:5px;height:15px;background:var(--accent);border-radius:2px;display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.6px;padding:3px 9px;border-radius:6px;background:var(--chip-bg);color:var(--chip-ink)}
+.bags{display:flex;flex-direction:column;gap:7px}
+.bag{font-size:13px;line-height:1.4}
+.bag b{color:var(--warn)}
+.specbar{display:grid;grid-template-columns:repeat(2,1fr);gap:7px 12px;font-size:13px}
+.specbar div span{color:var(--muted);display:block;font-size:11.4px}
+.specbar div b{font-size:14.2px}
+.note{font-size:12px;color:var(--muted);margin-top:auto;padding-top:7px;border-top:1px solid var(--line);line-height:1.45}
+table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14.8px;flex:1 1 auto;height:100%}
+thead th{padding:8px;font-size:15.4px;font-weight:700;text-align:center;
+ border-bottom:3px solid currentColor;color:var(--fg)}
+thead th.self{background:var(--self);border-radius:10px 10px 0 0}
+.pill{display:inline-block;padding:1px 6px;border-radius:999px;background:var(--accent);
+ color:var(--accent-ink);font-size:10.5px;font-weight:800;margin-right:6px;vertical-align:2px}
+thead th .v{display:block;font-size:12.4px;font-weight:500;color:var(--muted);margin-top:2px}
+thead th .p{display:block;font-size:20px;font-weight:800;color:var(--accent);margin-top:4px}
+tbody th{text-align:left;font-weight:600;color:var(--ink3);font-size:14.2px;padding:2.9px 10px;
+ border-bottom:1px solid var(--line);width:190px}
+tbody td{text-align:center;padding:2.9px 6px;border-bottom:1px solid var(--line);font-size:14.2px;color:var(--fg)}
+tbody td.self{background:var(--self);box-shadow:inset 1px 0 0 var(--accent),inset -1px 0 0 var(--accent)}
+tbody td.best{font-weight:800;color:var(--accent)}
+tbody tr:nth-child(even) td{background-color:var(--zebra)}
+tbody tr:nth-child(even) td.self{background:var(--self)}
+#fitbar{position:fixed;right:18px;bottom:18px;z-index:99;display:flex;align-items:center;gap:8px;
+ background:rgba(18,22,32,.86);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);
+ border-radius:999px;padding:7px 10px;box-shadow:0 8px 28px rgba(0,0,0,.28);
+ font:13px/1 -apple-system,"PingFang SC",system-ui,sans-serif;color:#e8edf5}
+#fitbar .scale{min-width:44px;text-align:center;font-variant-numeric:tabular-nums;opacity:.8}
+#fitbar button{border:0;border-radius:999px;padding:6px 11px;font-size:12.5px;font-weight:700;
+ background:rgba(255,255,255,.10);color:#e8edf5;cursor:pointer}
+#fitbar button:hover{background:rgba(255,255,255,.20)}
+#fitbar button.pri{background:#f0c33c;color:#231a08}
+#fitbar .sep{width:1px;height:18px;background:rgba(255,255,255,.18)}
+@media print{body{background:#fff}#wrap{padding:0}#stage{transform:none!important}
+ .slide{break-after:page}#fitbar{display:none}
+ @page{size:1920px 1080px;margin:0}}
+body.shot #fitbar{display:none}
+</style><style>body{background:#fff;padding:0}#wrap{padding:0}#stage{transform:none!important;width:auto;gap:0}</style></head><body><section class="slide dark">
+ <div class="pad" style="display:flex;flex-direction:column;height:100%">
+  <div class="head">
+   <div>
+    <div class="h1">ID.ERA 5X <em>Ultra vs T6 14.99：差 1 万</em></div>
+    <div class="sub"><b>结论</b>按「带不带 192 线激光雷达 + 城市 NOA」对位：5X 只有 Ultra 标配这套硬件（Max 是选装），T6 从 660 Max 激光雷达版（14.99，T6 自己的主销，占首月 50%）起才有。两边硬件同源（192 线 + 征程 6H + 420 TOPS + 城市/高速 NOA），到手价 5X 便宜 <b>1.00 万</b>；机械与空间则全面让位：电池 −19 kWh、续航 −140 km、前驱 155 kW 对后驱 170 kW、235 胎对 255 胎、无可变阻尼。</div>
+    <div class="sub2">单版本对位，不是主销对主销 · 价格只用到手价：5X Ultra 限时权益价 13.99（指导 15.99）／T6 660 Max 14.99（2026-11-11 经销商报价 0 优惠）· 抓取 2026-11-12</div>
+   </div>
+   <div class="legend">底色列 = 本品 · <b style="color:var(--accent)">加粗</b> = 该行更优 · ○ = 选装 · — = 无该项 · 末列为差值读法<br>不含主观打分，只做事实对照</div>
+  </div>
+  <div class="rules"><div><i>1</i>对位方式 = <b>功能对齐</b>：两台都必须是「192 线激光雷达 + 城市 NOA 标配」的那一档 → 5X Ultra、T6 660 Max 激光雷达版</div><div><i>2</i>价格 = <b>结论按到手价</b>，表头左为指导价：5X 15.99 / 13.99（限时权益价 −2 万）／T6 14.99 / 14.99（无现金优惠）</div><div><i>3</i>T6 <b>不在第 2 页池子里</b>：车长 4811 mm &gt; 池子上限 4800 mm；且 2026-09 仅首月 702 台（含展车/预售），不可与成熟车比走势</div><div><i>4</i>T6 版本 = 660 Max 激光雷达版（14.99，specid 79009），2026-09 上险 351 台 = T6 的 50%，即其主销款</div></div>
+  <table><thead><tr><th>参数<span class="v">价格：指导 / 成交（万元）</span></th><th class="self"><span class="pill">本品</span>ID.ERA 5X<span class="v">Ultra（智驾标配）</span><span class="p">15.99 / 13.99</span></th><th class="">ID.AURA T6<span class="v">660 Max 激光雷达版</span><span class="p">14.99 / 14.99</span></th><th class="">差值<span class="v">（5X 相对 T6）</span><span class="p">—</span></th></tr></thead><tbody><tr><th>到手价（万元）</th><td class="self"><b>13.99</b>（指导 15.99）</td><td class="">14.99（指导 14.99）</td><td class="">到手：5X 便宜 1.00 · 指导：5X 贵 1.00</td></tr><tr><th>尺寸 / 轴距（mm）</th><td class="self">4560×1896×1630 ／ 2815</td><td class="">4811×1879×1648 ／ 2836</td><td class="">短 251 · 窄 17 ／ 轴距 −21</td></tr><tr><th>整备质量（kg）</th><td class="self">1780</td><td class="">2126</td><td class="">轻 346</td></tr><tr><th>电池（kWh · 电芯）</th><td class="self">58.5 · 宁德(时代上汽)</td><td class="best">77.5 · 宁德(时代一汽)</td><td class="">少 19.0 kWh</td></tr><tr><th>CLTC 纯电（km）</th><td class="self">520</td><td class="best">660</td><td class="">少 140 km</td></tr><tr><th>快充（时长 · SOC）</th><td class="self">22 min（30–80%）</td><td class="">22 min（30–80%）</td><td class="">相同：4.4 min / 10%</td></tr><tr><th>电耗（kWh/100km）</th><td class="self">12.8</td><td class="">13.1</td><td class="">低 0.3（车轻 346 kg）</td></tr><tr><th>驱动 / 功率（kW）</th><td class="self">前驱 155</td><td class="best"><b>后驱 170</b></td><td class="">少 15 kW，且为前驱</td></tr><tr><th>0–100 km/h（s）</th><td class="self best">7.3</td><td class="">7.4</td><td class="">快 0.1 s（靠轻）</td></tr><tr><th>轮胎（前 / 后）</th><td class="self">235/45 R19</td><td class="">255/50 R19 ／ 255/45 R20</td><td class="">前 255 / 后 265，宽 20–30 mm、大 1 吋</td></tr><tr><th>悬架 / 可变阻尼</th><td class="self">麦弗逊 + 多连杆 · 无</td><td class="best"><b>麦弗逊 + 五连杆 · 软硬●</b></td><td class="">T6 独有软硬可调</td></tr><tr><th>智驾硬件与能力</th><td class="self">192 线● · 征程 6H · 420 TOPS · 城市 NOA●</td><td class="">192 线● · 征程 6H · 420 TOPS · 城市 NOA●</td><td class="">同源同规格，无差异</td></tr><tr><th>中控屏 / 车机芯片 / HUD</th><td class="self best">15.6″ · MT8676 · <b>HUD●</b></td><td class="">15.6″ · 未披露 · HUD—</td><td class="">5X 有 HUD，芯片可查</td></tr><tr><th>扬声器（个）</th><td class="self best">8</td><td class="">7（18 选装）</td><td class="">5X +1，T6 可升 18</td></tr><tr><th>前排座椅</th><td class="self">加热 · 通风 · 主副驾记忆</td><td class="">加热 · 通风（按摩○、二排加热○）</td><td class="">5X 多记忆，T6 可加按摩</td></tr><tr><th>后备厢（L）</th><td class="self">394（常规）／ +158 下沉 ／ 1,815（放倒）</td><td class="best">576–1,796</td><td class="">常规少 182 L；下沉另计 158 L</td></tr><tr><th>天幕 / 座椅材质</th><td class="self">不可开启全景天幕 · 仿皮</td><td class="">不可开启全景天窗 · 仿皮</td><td class="">平</td></tr></tbody></table>
+  <div class="note">⚠ <b>这是功能对齐，不是价格对齐</b>：5X 的全系只有 Ultra 把智驾包写进标配（Max 上 192 线雷达与城市 NOA 都是「○ 选装」，价格未公布），所以「拿 Ultra 比 T6 14.99」在功能上是对得上的，但在价格上是拿 5X 的顶配比 T6 的中配——两边各占一半道理。<br>⚠ <b>到手价的差异全部来自「限时」二字</b>：5X Ultra 指导 15.99、限时权益价 13.99（−2 万，会到期）；T6 指导 14.99、现无现金优惠（2026-11-11 经销商报价 0 万）。权益到期后这一行会翻转成 5X 贵 1 万，结论句必须跟着改。<br>⚠ <b>智驾没有差异，这是本页最重要的结论</b>：两台都是 192 线激光雷达 + 地平线征程 6H + 420 TOPS + 城市/高速 NOA 标配，方案同源（酷睿程 + 地平线）。5X 在宣传里说的「合资首搭」在时间上不成立——T6 早两个月（9-20）就把这套硬件放到了 14.99 万。<br>⚠ <b>T6 首月数据不可比走势</b>：2026-09 上险 702 台（含展车/预售），660 Max 占 351 台 / 50%；它也不进第 2 页池子（4811 mm 超出 4800 mm 上限）。<br>⚠ <b>5X 的「双层/下沉式后备厢」不等于更大</b>：常规 394 L、另设 158 L 下沉空间、放倒 1,815 L（官方与多家媒体口径一致，之家参数表此项为空）；即便把下沉的 158 L 全算进去也只有 552 L，仍小于 T6 的 576 L。下沉层的作用是分层（湿/干、低频/高频、隐私件），而不是扩容；它能有这层深度，前提是<b>全系无备胎</b>（配置表「备胎规格：无」）。<br>⚠ 快充「相同」要按每 10% 电量看：两台都是 22 分钟充 50%（30–80%），折算 4.4 min/10%；5X 电池小 19 kWh，同样 10% 对应的绝对电量更少。<br>数据源：之家 series 8761（Ultra specid 78734）与 8584（T6 660 Max specid 79009），两侧均未解析 0；T6 价格为汽车之家经销商页 2026-11-11 报价。</div>
+ </div>
+</section></body></html>

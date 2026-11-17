@@ -1,0 +1,233 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<title>ID.ERA 5X · 装备梯度与竞品对比（16:9）</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ --page:#e8e9ee; --slide-bg:#fff; --slide-bg-2:#fff;
+ --fg:#14161c; --ink2:#1f2430; --ink3:#4b5563; --muted:#6b7280;
+ --line:#e3e7ee; --line2:#e2e4ea; --card:#fcfcfe; --card2:#f2f7ff;
+ --zebra:#fafbfc; --self:#e3edfd;
+ --accent:#1d4ed8; --accent-ink:#fff; --gold:#f0c33c;
+ --warn:#b45309; --warn-bg:#fef3c7; --ok:#166534; --ok-bg:#dcfce7;
+ --bad:#991b1b; --bad-bg:#fef2f2; --chip-bg:#eef0f5; --chip-ink:#374151;
+ --buy-bg:#eef2ff; --teal:#0f766e; --teal-bg:#ccfbf1;
+ --shadow:0 10px 26px rgba(29,78,216,.10);
+ background:var(--page); overflow-x:hidden;
+ font:16px/1.5 -apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+ color:var(--fg); -webkit-font-smoothing:antialiased}
+body.mode-dark{
+ --page:#070b12; --slide-bg:linear-gradient(145deg,#0b1526 0%,#122238 55%,#17304d 100%);
+ --slide-bg-2:linear-gradient(145deg,#0b1526 0%,#122238 55%,#17304d 100%);
+ --fg:#eef2f8; --ink2:#dbe3ee; --ink3:#a9b6c8; --muted:#8b99ab;
+ --line:rgba(255,255,255,.14); --line2:rgba(255,255,255,.18);
+ --card:rgba(255,255,255,.045); --card2:rgba(240,195,60,.10);
+ --zebra:rgba(255,255,255,.04); --self:rgba(240,195,60,.12);
+ --accent:#f0c33c; --accent-ink:#231a08;
+ --warn:#fbbf24; --warn-bg:rgba(251,191,36,.14); --ok:#4ade80; --ok-bg:rgba(74,222,128,.14);
+ --bad:#f87171; --bad-bg:rgba(248,113,113,.14); --chip-bg:rgba(255,255,255,.07); --chip-ink:#cfd8e3;
+ --buy-bg:rgba(240,195,60,.10); --teal:#5eead4; --teal-bg:rgba(94,234,212,.12);
+ --shadow:0 10px 26px rgba(0,0,0,.45)}
+#wrap{margin:0 auto;padding:24px 0}
+#stage{width:1920px;transform-origin:top left;display:flex;flex-direction:column;gap:24px}
+.slide{width:1920px;height:1080px;background:var(--slide-bg);position:relative;overflow:hidden;
+ display:flex;flex-direction:column;color:var(--fg)}
+.slide.dark{background:var(--slide-bg-2)}
+.pad{padding:46px 60px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;
+ border-bottom:3px solid currentColor;padding-bottom:14px}
+.h1{font-size:50px;font-weight:800;letter-spacing:-1px;line-height:1.1}
+.h1 em{font-style:normal;color:var(--accent)}
+.sub{margin-top:8px;font-size:18px;font-weight:700;line-height:1.35;max-width:1180px}
+.sub b{color:var(--accent);margin-right:8px;font-weight:800}
+.sub2{margin-top:5px;font-size:12.8px;color:var(--muted);line-height:1.5}
+.badge{display:inline-block;padding:5px 14px;border-radius:999px;background:var(--gold);color:#231a08;
+ font-size:16px;font-weight:700;margin-right:10px}
+.legend{font-size:15px;opacity:.7;text-align:right;line-height:1.7}
+.rules{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:5px 22px;
+ font-size:13.2px;line-height:1.45;color:var(--muted)}
+.rules b{color:var(--accent);font-weight:700}
+.rules i{font-style:normal;opacity:.55;margin-right:5px}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px;flex:1;min-height:0}
+.tier{border:2px solid var(--line2);border-radius:14px;padding:12px 13px 10px;display:flex;
+ flex-direction:column;background:var(--card);min-height:0}
+.tier.hot{border-color:var(--accent);background:var(--card2);box-shadow:var(--shadow)}
+.tier .nm{font-size:16.5px;font-weight:700;color:var(--ink3);line-height:1.25;min-height:20px}
+.tier .pick{display:inline-block;margin-left:7px;padding:1px 7px;border-radius:999px;
+ background:var(--accent);color:var(--accent-ink);font-size:11.5px;font-weight:700;vertical-align:middle}
+.tier .pr{font-size:40px;font-weight:800;color:var(--accent);letter-spacing:-1.5px;line-height:1.05;margin-top:4px}
+.tier .pr small{font-size:16px;font-weight:700;margin-left:2px}
+.tier .deal{font-size:13px;font-weight:700;color:var(--ok);background:var(--ok-bg);border-radius:6px;
+ padding:2px 8px;display:inline-block;margin-top:5px;align-self:flex-start}
+.tier .dlrow{display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap}
+.tier .dl{font-size:13.5px;font-weight:700;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:2px 8px}
+.tier .pw{font-size:12px;font-weight:700;color:var(--teal);background:var(--teal-bg);border-radius:6px;padding:2px 7px}
+.tier .sen{margin-top:6px;font-size:12.8px;line-height:1.4;color:var(--ink2);font-weight:600;
+ background:var(--buy-bg);border-left:3px solid var(--accent);padding:5px 8px;border-radius:0 6px 6px 0}
+.tier .spec{margin-top:4px;font-size:12.2px;line-height:1.42;color:var(--ink3)}
+.tier .spec b{color:var(--muted);font-weight:700;margin-right:5px;font-size:11px;letter-spacing:.3px}
+.tier .gain{margin-top:4px}
+.tier .gl{font-size:11.2px;letter-spacing:.5px;color:var(--ink3);margin-bottom:3px;font-weight:700}
+.tier em{font-style:normal;display:inline-block;font-size:11.5px;font-weight:700;padding:1px 5px;
+ border-radius:5px;margin:0 3px 2px 0;line-height:1.26;background:var(--warn-bg);color:var(--warn)}
+.tier em.n{background:var(--chip-bg);color:var(--chip-ink);font-weight:600}
+.tier em.c{background:var(--bad-bg);color:var(--bad)}
+.tier em.none{background:transparent;color:var(--muted);font-weight:500;padding-left:0}
+.tier .share{margin-top:auto;padding-top:7px;border-top:1px dashed var(--line2);font-size:12.6px;color:var(--muted)}
+.tier .share b{font-size:15px;color:var(--accent);font-weight:800;margin:0 3px}
+.foot{display:grid;grid-template-columns:1.35fr .95fr .9fr;gap:14px;margin-top:14px}
+.foot.f4{grid-template-columns:1.1fr .66fr .72fr 1.02fr;gap:11px}
+.offis{display:flex;flex-direction:column;gap:5px}
+.offi{font-size:12.2px;line-height:1.36;color:var(--ink2)}
+.offi::before{content:'·';color:var(--accent);font-weight:800;margin-right:5px}
+.card{border:1px solid var(--line2);border-radius:12px;padding:12px 14px;background:var(--card)}
+.card h3{font-size:15px;margin-bottom:7px;color:var(--accent);display:flex;align-items:center;gap:8px}
+.card h3 i{width:5px;height:15px;background:var(--accent);border-radius:2px;display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.6px;padding:3px 9px;border-radius:6px;background:var(--chip-bg);color:var(--chip-ink)}
+.bags{display:flex;flex-direction:column;gap:7px}
+.bag{font-size:13px;line-height:1.4}
+.bag b{color:var(--warn)}
+.specbar{display:grid;grid-template-columns:repeat(2,1fr);gap:7px 12px;font-size:13px}
+.specbar div span{color:var(--muted);display:block;font-size:11.4px}
+.specbar div b{font-size:14.2px}
+.note{font-size:12px;color:var(--muted);margin-top:auto;padding-top:7px;border-top:1px solid var(--line);line-height:1.45}
+table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14.8px;flex:1 1 auto;height:100%}
+thead th{padding:8px;font-size:15.4px;font-weight:700;text-align:center;
+ border-bottom:3px solid currentColor;color:var(--fg)}
+thead th.self{background:var(--self);border-radius:10px 10px 0 0}
+.pill{display:inline-block;padding:1px 6px;border-radius:999px;background:var(--accent);
+ color:var(--accent-ink);font-size:10.5px;font-weight:800;margin-right:6px;vertical-align:2px}
+thead th .v{display:block;font-size:12.4px;font-weight:500;color:var(--muted);margin-top:2px}
+thead th .p{display:block;font-size:20px;font-weight:800;color:var(--accent);margin-top:4px}
+tbody th{text-align:left;font-weight:600;color:var(--ink3);font-size:14.2px;padding:2.9px 10px;
+ border-bottom:1px solid var(--line);width:190px}
+tbody td{text-align:center;padding:2.9px 6px;border-bottom:1px solid var(--line);font-size:14.2px;color:var(--fg)}
+tbody td.self{background:var(--self);box-shadow:inset 1px 0 0 var(--accent),inset -1px 0 0 var(--accent)}
+tbody td.best{font-weight:800;color:var(--accent)}
+tbody tr:nth-child(even) td{background-color:var(--zebra)}
+tbody tr:nth-child(even) td.self{background:var(--self)}
+#fitbar{position:fixed;right:18px;bottom:18px;z-index:99;display:flex;align-items:center;gap:8px;
+ background:rgba(18,22,32,.86);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);
+ border-radius:999px;padding:7px 10px;box-shadow:0 8px 28px rgba(0,0,0,.28);
+ font:13px/1 -apple-system,"PingFang SC",system-ui,sans-serif;color:#e8edf5}
+#fitbar .scale{min-width:44px;text-align:center;font-variant-numeric:tabular-nums;opacity:.8}
+#fitbar button{border:0;border-radius:999px;padding:6px 11px;font-size:12.5px;font-weight:700;
+ background:rgba(255,255,255,.10);color:#e8edf5;cursor:pointer}
+#fitbar button:hover{background:rgba(255,255,255,.20)}
+#fitbar button.pri{background:#f0c33c;color:#231a08}
+#fitbar .sep{width:1px;height:18px;background:rgba(255,255,255,.18)}
+@media print{body{background:#fff}#wrap{padding:0}#stage{transform:none!important}
+ .slide{break-after:page}#fitbar{display:none}
+ @page{size:1920px 1080px;margin:0}}
+body.shot #fitbar{display:none}
+</style></head><body>
+<div id="wrap"><div id="stage">
+
+<section class="slide">
+ <div class="pad" style="display:flex;flex-direction:column;height:100%">
+  <div class="head">
+   <div>
+    <div class="h1">ID.ERA 5X <em>四个配置怎么选</em></div>
+    <div class="sub"><b>结论</b>限时权益价 9.99 / 11.59 / 12.79 / 13.99 万（全系统一降 2 万），但结构是 2×2：Pro+ 的 1.6 万只买了 13.7 kWh 电池，配置项零变化；智驾硬件从 Max 才出现，且在 Max 上仍是「选装」，到 Ultra 才写进标配——所以「买哪档」其实卡在智驾包的价钱上，而官方没公布。</div>
+    <div class="sub2">指导价 11.99–15.99 万 · 限时权益价 9.99–13.99 万（官方上市海报）· 2026-11-12 上市 · 抓取 2026-11-12</div>
+   </div>
+   <div class="legend">
+    <span class="badge">2026 款 · 4 个配置 / 3 个价差台阶</span><br>每档只列与上一档的差异（口径与来源见页脚）
+   </div>
+  </div>
+  <div class="tiers" style="grid-template-columns:repeat(4,1fr)"><div class="tier"><div class="nm">2026款 Pro</div><div class="pr">11.99<small>万</small></div><div class="deal">成交 9.99</div><div class="dlrow"><div class="dl">起步</div></div><div class="sen">入门档：智舱与补能一件没砍，但 415 km + 215 窄胎 + 天幕要选装</div><div class="spec"><b>本档规格</b>45.8 kWh 铁锂 · CLTC 415 km · 155 kW 前驱 · 仿皮无加热 · 天幕○</div><div class="share">上险 <b>无（今日上市）</b></div><div class="fit" style="margin-top:8px;font-size:12.8px;color:var(--ink3)"><b style="color:var(--accent);margin-right:6px">适合</b>入门价广告位：有家充、只在城里跑</div></div><div class="tier"><div class="nm">2026款 Pro+</div><div class="pr">13.59<small>万</small></div><div class="deal">成交 11.59</div><div class="dlrow"><div class="dl">+1.60 万</div><span class="pw">续航包</span></div><div class="sen">1.6 万只买 13.7 kWh 电池，配置零变化</div><div class="spec"><b>本档规格</b>58.5 kWh 铁锂 · 520 km · 同 Pro · 整备质量 +95 kg</div><div class="gain"><div class="gl">多了 · 新增标配</div><em class="none">—</em></div><div class="gain"><div class="gl">也变了 · 换规格</div><em class="n">纯电 415→520 km</em><em class="n">电池 45.8→58.5 kWh</em></div><div class="gain"><div class="gl">代价 · 减配</div><em class="c">0–100 7.1→7.3 s</em></div><div class="share">上险 <b>无（今日上市）</b></div><div class="fit" style="margin-top:8px;font-size:12.8px;color:var(--ink3)"><b style="color:var(--accent);margin-right:6px">适合</b>必须 520 km 又咬死 14 万内</div></div><div class="tier"><div class="nm">2026款 Max</div><div class="pr">14.79<small>万</small></div><div class="deal">成交 12.79</div><div class="dlrow"><div class="dl">+1.20 万</div><span class="pw">舒适 + 电芯</span></div><div class="sen">舒适件补齐，智驾仍选装</div><div class="spec"><b>本档规格</b>58.5 kWh 宁德 · 18 吋 · 电动尾门 · 前排加热通风</div><div class="gain"><div class="gl">多了 · 新增标配</div><em class="">便利件（尾门 + 后视镜）</em><em class="">全景天幕套装（选装转标配）</em><em class="">座舱舒适包</em></div><div class="gain"><div class="gl">也变了 · 换规格</div><em class="n">电芯 国轩高科→宁德(时代上汽)</em><em class="n">前方感知摄像头双目（可选装）</em></div><div class="gain"><div class="gl">代价 · 减配</div><em class="none">—</em></div><div class="share">上险 <b>无（今日上市）</b></div><div class="fit" style="margin-top:8px;font-size:12.8px;color:var(--ink3)"><b style="color:var(--accent);margin-right:6px">适合</b>要舒适与座舱，智驾再议</div></div><div class="tier"><div class="nm">2026款 Ultra</div><div class="pr">15.99<small>万</small></div><div class="deal">成交 13.99</div><div class="dlrow"><div class="dl">+1.20 万</div><span class="pw">满配</span></div><div class="sen">智驾包 + HUD 一次给全</div><div class="spec"><b>本档规格</b>19 吋 235/45 · HUD · 192 线雷达 · 征程 6H/420 TOPS</div><div class="gain"><div class="gl">多了 · 新增标配</div><em class="">智驾包（选装转标配）</em><em class="">座舱智能件（选装转标配）</em></div><div class="gain"><div class="gl">也变了 · 换规格</div><em class="n">前方感知摄像头 单目→双目</em></div><div class="gain"><div class="gl">代价 · 减配</div><em class="none">—</em></div><div class="share">上险 <b>无（今日上市）</b></div><div class="fit" style="margin-top:8px;font-size:12.8px;color:var(--ink3)"><b style="color:var(--accent);margin-right:6px">适合</b>智驾与胎宽都要到位</div></div></div>
+  <div class="foot f4">
+   <div class="card"><h3><i></i>全系都有（不用挑版本）</h3><div class="chips"><span class="chip">15.6″ 2.5K 中控屏</span><span class="chip">MT8676 + VW OS</span><span class="chip">10.25″ 液晶仪表</span><span class="chip">LED 自动大灯 + 自适应远近光</span><span class="chip">热泵空调</span><span class="chip">3.5 kW 对外放电</span><span class="chip">360° 影像 + 透明底盘</span><span class="chip">12 超声波雷达</span><span class="chip">L2（全速 ACC + 车道居中）</span><span class="chip">快充 22 min（30–80%）</span><span class="chip">前排中间气囊</span><span class="chip">50W 手机无线充</span><span class="chip">CarPlay / HiCar / CarLink</span></div></div>
+   <div class="card"><h3><i></i>权益与选装</h3><div class="bags"><div class="bag"><b>限时权益价 9.99–13.99 万</b>（官方上市海报）：Pro 11.99→9.99、Pro+ 13.59→11.59、Max 14.79→12.79、Ultra 15.99→13.99，<b>全系统一降 2 万，档间价差不变</b></div><div class="bag"><b>四礼</b>：保值回购礼 · 限时焕新礼 · 装备升级礼 · 智行守护礼（内容未公开，智行守护礼疑为智驾相关权益）</div><div class="bag"><b>智驾包（Max 选装，价格未公开）</b>：192 线激光雷达 + 征程 6H / 420 TOPS + 11 摄像头 + 城市/高速 NOA；Ultra 标配</div><div class="bag"><b>选装</b>：心情套件（灵感窗 / 能量岛 / 光映盒）· 19 吋轮毂（Ultra 标配）· 五款车色</div></div></div>
+   <div class="card"><h3><i></i>车身与三电</h3><div class="specbar"><div><span>长×宽×高 (mm)</span><b>4560×1896×1630</b></div><div><span>轴距 (mm)</span><b>2815</b></div><div><span>电池</span><b>45.8 / 58.5 kWh 铁锂</b></div><div><span>快充</span><b>22 min（30–80%）</b></div></div></div>
+   <div class="card"><h3><i></i>官网独有（之家参数表没有）</h3><div class="offis"><div class="offi">官方<b>限时权益价 9.99 万元起</b>，四档一律 −2 万（9.99 / 11.59 / 12.79 / 13.99）；四礼：保值回购 / 限时焕新 / 装备升级 / 智行守护</div><div class="offi"><b>车位到车位 NOA</b>：起点车位出发到终点车位全程无断点；RPA 遥控泊车、循迹倒车记忆 200 m、晕车舒缓模式</div><div class="offi"><b>87.3% 得房率 · 1,815 L 行李厢 · 39 处储物</b> + 主驾座椅抽屉 + 电动密码手套箱（之家「后备厢容积」为空）</div><div class="offi">7 安全气囊（含 117 L 副驾气囊）· 高强度钢占比 83% · 2,000 J 底部装甲 · 碰撞 2 ms 内断高压</div><div class="offi">豆包大模型 2.0 行业首发 · Face ID · 手势指代控制车窗/遮阳帘 · 二排放平 2.4 m 大床模式</div></div></div>
+  </div>
+  <div class="note">⚠ <b>Pro+ 的 1.6 万是纯电池升级</b>：45.8→58.5 kWh、+105 km，除电池与加速外配置项零变化（引擎算出的「多了」为 0 项）；代价是整备质量 +95 kg、0–100 从 7.1 s 变 7.3 s。<br>⚠ <b>Pro / Pro+ 的全景天幕、车顶行李架、天幕遮阳帘都是「○ 选装」</b>，到 Max 才转标配——权益价 9.99 万这档连天幕都要另付。<br>⚠ <b>Max 的 1.2 万＝</b>电动尾门 · 全景天幕套装 · 座舱舒适包（座椅/方向盘/氛围灯）· 电芯换宁德。<br>⚠ <b>Max 的智驾是选装，不是标配</b>：之家把 Max 的激光雷达 / 征程 6H / 420 TOPS / 11 摄像头 / 城市+高速 NOA 全部标「2（选装）」，另有 13 项功能标「○」，到 Ultra 才「1（标配）」。智驾包价格未公开，是这张表唯一算不出的数。<br>⚠ <b>主销预判（无自家上险，用同池结构推）</b>：低续航档在池内普遍不吃量——铂智3X 430 km 占 12%、海狮05 430 km 占 2%，且铂智3X 该档 72% 是最便宜的 Air（10.98 万）。故 415 km 的 Pro 更像「9.99 万起」的价格广告位，<b>主销大概率落在 520 km 的 Pro+ 或 Max</b>（+1.6 / +1.2 万换 105 km 与舒适件）。<br>数据源：之家 series 8761（4 版本 / 219 行 / 未解析 0）+ 上汽大众官网与上市海报，2026-11-12 抓取。</div>
+ </div>
+</section>
+
+<section class="slide dark">
+ <div class="pad" style="display:flex;flex-direction:column;height:100%">
+  <div class="head">
+   <div>
+    <div class="h1">ID.ERA 5X <em>同池子头部横向对比</em></div>
+    <div class="sub"><b>结论</b>池内 10.6 万台 / 63 车系（2026-09）。5X 的 Max 权益价 12.79 万在七台里排<b>第三贵</b>，155 kW 与 4.4 分钟/10% 的补能也只压过铂智3X（150 kW、4.8 分钟）。而铂智3X 便宜 1.56 万，<b>这一档两车都不带激光雷达与城市 NOA</b>（5X 要选装智驾包、铂智3X 要上到 14.98 万）；5X 多花的是多连杆后悬（对手是扭力梁）+ 全景天幕 + 15.6″ 屏、座椅记忆、方向盘加热。</div>
+    <div class="sub2">六台竞品各取 2026-09 池内上险最高的主销款；5X 取 Max（今日上市，无上险，价格用官方限时权益价）· 抓取 2026-11-12</div>
+   </div>
+   <div class="legend">底色列 = 本品 · <b style="color:var(--accent)">加粗</b> = 该行最优 · ○ = 选装 · — = 无该项<br>不含主观打分，只做事实对照</div>
+  </div>
+  <div class="rules"><div><i>1</i>池子 = <b>纯电 × SUV × 车长 4.3–4.8 m × 成交价 10–16.5 万</b> → 106,256 台 / 63 车系（2026-09 版本级）</div><div><i>2</i>头部 = 池内上险 TOP5（深蓝S05 / 零跑C10 / AION i60 / 海狮05 EV / 小鹏MONA L03）<b>+ 铂智3X</b>（第 7 位 7,402 台，合资纯电直接竞品）；5X 今日上市，占第 7 列</div><div><i>3</i>版本 = 各车 2026-09 上险最高的<b>主销款</b>；5X 无上险，取四档中的 Max（14.79）作配置起点</div><div><i>4</i>价格 = 指导价 / <b>实际成交</b>：竞品为 2026-09 版本级成交价（TP），5X 为官方限时权益价 12.79（今日上市，无 TP）</div></div>
+  <table><thead><tr><th>参数<span class="v">价格：指导 / 成交（万元）</span></th><th class="self"><span class="pill">本品</span>ID.ERA 5X<span class="v">Max（14.79）</span><span class="p">14.79 / 12.79</span></th><th class="">深蓝 S05<span class="v">520 智臻版（主销）</span><span class="p">12.99 / 12.19</span></th><th class="">零跑 C10<span class="v">660 激光雷达版（主销）</span><span class="p">14.28 / 14.19</span></th><th class="">AION i60<span class="v">520 宁德版（主销）</span><span class="p">11.48 / 11.46</span></th><th class="">海狮 05 EV<span class="v">540 智航版（主销）</span><span class="p">12.99 / 12.66</span></th><th class="">小鹏 MONA L03<span class="v">525 Max（主销）</span><span class="p">13.48 / 13.18</span></th><th class="">铂智 3X<span class="v">520 Pro（主销）</span><span class="p">12.98 / 11.23</span></th></tr></thead><tbody><tr><th>池内上险（辆，09）</th><td class="self">0（今日上市）</td><td class="best">11,444</td><td class="">8,699</td><td class="">8,387</td><td class="">8,380</td><td class="">7,965</td><td class="">7,402</td></tr><tr><th>池内份额（%）</th><td class="self">—</td><td class="best">10.8</td><td class="">8.2</td><td class="">7.9</td><td class="">7.9</td><td class="">7.5</td><td class="">7.0</td></tr><tr><th>主销款（9 月占比）</th><td class="self">未上市 · 无主销</td><td class="">12.99 万 · 51%</td><td class="">14.28 万 · 54%</td><td class="">11.48 万 · 35%</td><td class="">12.99 万 · 60%</td><td class="">13.48 万 · 52%</td><td class="">12.98 万 · 56%</td></tr><tr><th>长×宽×高（mm）</th><td class="self">4560×1896×1630</td><td class="">4620×1900×1600</td><td class="">4749×1900×1680</td><td class="">4685×1854×1660</td><td class="">4620×1860×1630</td><td class="">4650×1920×1600</td><td class="">4600×1850×1660</td></tr><tr><th>轴距（mm）</th><td class="self">2815</td><td class="best">2880</td><td class="">2825</td><td class="">2775</td><td class="">2770</td><td class="">2850</td><td class="">2765</td></tr><tr><th>电池（kWh · 电芯）</th><td class="self">58.5 · 宁德(时代上汽)</td><td class="">56.12 · 宁德</td><td class="best">81.9 · 中创新航/亿纬/国轩</td><td class="">56.68 · 宁德(时代广汽)</td><td class="">57.55 · 弗迪</td><td class="">56 · 中创新航</td><td class="">58.37 · 中创新航/正力</td></tr><tr><th>CLTC 纯电（km）</th><td class="self">520</td><td class="">520</td><td class="best">660</td><td class="">520</td><td class="">540</td><td class="">525</td><td class="">520</td></tr><tr><th>快充（原值→每10%）</th><td class="self">22（30–80%）→ 4.4</td><td class="">15（30–80%）→ 3.0</td><td class="">16（30–80%）→ 3.2</td><td class="">22（30–80%）→ 4.4</td><td class="best">9（10–97%）→ 1.0</td><td class="">15.8（30–80%）→ 3.2</td><td class="">24（30–80%）→ 4.8</td></tr><tr><th>驱动 / 功率（kW）</th><td class="self">前驱 155</td><td class="">后驱 200</td><td class="best">后驱 230</td><td class="">前驱 165</td><td class="">后驱 200</td><td class="">后驱 183</td><td class="">前驱 150</td></tr><tr><th>0–100 km/h（s）</th><td class="self">7.3</td><td class="">6.28</td><td class="best">6.02</td><td class="">未披露</td><td class="">6.6</td><td class="">7.5</td><td class="">未披露</td></tr><tr><th>悬架 / 可变阻尼</th><td class="self">麦弗逊 + 多连杆 · 无</td><td class="best">麦弗逊 + 五连杆 · 软硬●</td><td class="best">麦弗逊 + 五连杆 · 软硬●</td><td class="">麦弗逊 + 五连杆 · 无</td><td class="">麦弗逊 + 五连杆 · 无</td><td class="">麦弗逊 + 五连杆 · 软硬○</td><td class="">麦弗逊 + 扭力梁 · 无</td></tr><tr><th>后备厢（L）</th><td class="self">未披露</td><td class="">492</td><td class="">510–1809</td><td class="">416–967</td><td class="best">600</td><td class="">539–1640</td><td class="">未披露</td></tr><tr><th>激光雷达</th><td class="self">○ 选装（192 线）</td><td class="">—</td><td class="best">● 128 线</td><td class="">—</td><td class="">○ 选装</td><td class="">—</td><td class="">—</td></tr><tr><th>智驾芯片 / 算力</th><td class="self">○ 征程 6H · 420 TOPS</td><td class="">—</td><td class="">骁龙 8650 · 未披露</td><td class="">—</td><td class="">Orin-N · 84 TOPS</td><td class="best">图灵 · 750 TOPS</td><td class="">—</td></tr><tr><th>城市 NOA</th><td class="self">○ 选装</td><td class="">—（仅高速）</td><td class="best">●</td><td class="">—</td><td class="">○ 选装</td><td class="best">●</td><td class="">—</td></tr><tr><th>中控屏 / 车机芯片</th><td class="self">15.6″ / MT8676</td><td class="">15.4″ / 未披露</td><td class="best">17.3″ / 骁龙 8295P</td><td class="">15.6″ / 骁龙 8155P</td><td class="">15.6″ / 比亚迪 D100</td><td class="">15.6″ / MT8676</td><td class="">14.6″ / 骁龙 8155</td></tr><tr><th>扬声器（个）</th><td class="self">8</td><td class="">8（14○）</td><td class="best">18</td><td class="">6</td><td class="">8</td><td class="">9（20○）</td><td class="">9（11○）</td></tr><tr><th>前排座椅功能</th><td class="self">加热 · 通风</td><td class="best">加热 · 通风 · 按摩（主驾）</td><td class="">加热 · 通风 · 按摩○</td><td class="">—</td><td class="">加热 · 通风</td><td class="">加热 · 通风 · 按摩○</td><td class="">加热 · 通风 · 按摩○</td></tr><tr><th>天窗 / 座椅材质</th><td class="self">不可开启全景天幕 · 仿皮</td><td class="">不可开启全景天窗 · 仿皮</td><td class="">不可开启全景天窗 · 仿皮</td><td class="">无天窗 · 仿皮</td><td class="">不可开启全景天窗 · 仿皮</td><td class="">不可开启全景天窗 · 仿皮（真皮○）</td><td class="">无天窗 · 仿皮</td></tr></tbody></table>
+  <div class="note">⚠ <b>5X 今日上市</b>：无上险、无成交价，价格列用官方<b>限时权益价 12.79 万</b>（Max，指导价 14.79，全系一律 −2 万）；竞品为 2026-09 版本级成交价（TP），同为「实际到手价」口径，可直接比。<br>⚠ 深蓝S05 的 12.99 万横跨两年款三条编码（TP 11.49–12.19）：占比按指导价聚合 51%，TP 取当月最热的 2027 款 12.19；铂智3X 12.98 万有两款同价配置（同 TP），主销款是池内唯一的<b>扭力梁</b>、无天窗；<b>激光雷达与城市 NOA 这一档两车都没有</b>（5X 选装、铂智3X 要 14.98 万），表里分别是「○ 选装」与「—」，不等于「5X 有」。<br>⚠ 快充区间不同（海狮05 10–97%，其余 30–80%），已折成「每 10% 电量耗时」：5X 4.4 / S05 3.0 / C10 3.2 / i60 4.4 / 海狮05 1.0 / L03 3.2 / 铂智3X 4.8 分钟。5X 后备厢之家未录入（官网 1,815 L 为放倒容积），写「未披露」而非「没有」。份额 = 池内上险 ÷ 106,256，主销占比 = 该档上险 ÷ 该车池内上险，均为 <b>2026-09 单月</b>；页面数字经 verify_page.py 版本级对账。</div>
+ </div>
+</section>
+<section class="slide dark">
+ <div class="pad" style="display:flex;flex-direction:column;height:100%">
+  <div class="head">
+   <div>
+    <div class="h1">ID.ERA 5X <em>Ultra vs T6 14.99：差 1 万</em></div>
+    <div class="sub"><b>结论</b>按「带不带 192 线激光雷达 + 城市 NOA」对位：5X 只有 Ultra 标配这套硬件（Max 是选装），T6 从 660 Max 激光雷达版（14.99，T6 自己的主销，占首月 50%）起才有。两边硬件同源（192 线 + 征程 6H + 420 TOPS + 城市/高速 NOA），到手价 5X 便宜 <b>1.00 万</b>；机械与空间则全面让位：电池 −19 kWh、续航 −140 km、前驱 155 kW 对后驱 170 kW、235 胎对 255 胎、无可变阻尼。</div>
+    <div class="sub2">单版本对位，不是主销对主销 · 价格只用到手价：5X Ultra 限时权益价 13.99（指导 15.99）／T6 660 Max 14.99（2026-11-11 经销商报价 0 优惠）· 抓取 2026-11-12</div>
+   </div>
+   <div class="legend">底色列 = 本品 · <b style="color:var(--accent)">加粗</b> = 该行更优 · ○ = 选装 · — = 无该项 · 末列为差值读法<br>不含主观打分，只做事实对照</div>
+  </div>
+  <div class="rules"><div><i>1</i>对位方式 = <b>功能对齐</b>：两台都必须是「192 线激光雷达 + 城市 NOA 标配」的那一档 → 5X Ultra、T6 660 Max 激光雷达版</div><div><i>2</i>价格 = <b>结论按到手价</b>，表头左为指导价：5X 15.99 / 13.99（限时权益价 −2 万）／T6 14.99 / 14.99（无现金优惠）</div><div><i>3</i>T6 <b>不在第 2 页池子里</b>：车长 4811 mm &gt; 池子上限 4800 mm；且 2026-09 仅首月 702 台（含展车/预售），不可与成熟车比走势</div><div><i>4</i>T6 版本 = 660 Max 激光雷达版（14.99，specid 79009），2026-09 上险 351 台 = T6 的 50%，即其主销款</div></div>
+  <table><thead><tr><th>参数<span class="v">价格：指导 / 成交（万元）</span></th><th class="self"><span class="pill">本品</span>ID.ERA 5X<span class="v">Ultra（智驾标配）</span><span class="p">15.99 / 13.99</span></th><th class="">ID.AURA T6<span class="v">660 Max 激光雷达版</span><span class="p">14.99 / 14.99</span></th><th class="">差值<span class="v">（5X 相对 T6）</span><span class="p">—</span></th></tr></thead><tbody><tr><th>到手价（万元）</th><td class="self"><b>13.99</b>（指导 15.99）</td><td class="">14.99（指导 14.99）</td><td class="">到手：5X 便宜 1.00 · 指导：5X 贵 1.00</td></tr><tr><th>尺寸 / 轴距（mm）</th><td class="self">4560×1896×1630 ／ 2815</td><td class="">4811×1879×1648 ／ 2836</td><td class="">短 251 · 窄 17 ／ 轴距 −21</td></tr><tr><th>整备质量（kg）</th><td class="self">1780</td><td class="">2126</td><td class="">轻 346</td></tr><tr><th>电池（kWh · 电芯）</th><td class="self">58.5 · 宁德(时代上汽)</td><td class="best">77.5 · 宁德(时代一汽)</td><td class="">少 19.0 kWh</td></tr><tr><th>CLTC 纯电（km）</th><td class="self">520</td><td class="best">660</td><td class="">少 140 km</td></tr><tr><th>快充（时长 · SOC）</th><td class="self">22 min（30–80%）</td><td class="">22 min（30–80%）</td><td class="">相同：4.4 min / 10%</td></tr><tr><th>电耗（kWh/100km）</th><td class="self">12.8</td><td class="">13.1</td><td class="">低 0.3（车轻 346 kg）</td></tr><tr><th>驱动 / 功率（kW）</th><td class="self">前驱 155</td><td class="best"><b>后驱 170</b></td><td class="">少 15 kW，且为前驱</td></tr><tr><th>0–100 km/h（s）</th><td class="self best">7.3</td><td class="">7.4</td><td class="">快 0.1 s（靠轻）</td></tr><tr><th>轮胎（前 / 后）</th><td class="self">235/45 R19</td><td class="">255/50 R19 ／ 255/45 R20</td><td class="">前 255 / 后 265，宽 20–30 mm、大 1 吋</td></tr><tr><th>悬架 / 可变阻尼</th><td class="self">麦弗逊 + 多连杆 · 无</td><td class="best"><b>麦弗逊 + 五连杆 · 软硬●</b></td><td class="">T6 独有软硬可调</td></tr><tr><th>智驾硬件与能力</th><td class="self">192 线● · 征程 6H · 420 TOPS · 城市 NOA●</td><td class="">192 线● · 征程 6H · 420 TOPS · 城市 NOA●</td><td class="">同源同规格，无差异</td></tr><tr><th>中控屏 / 车机芯片 / HUD</th><td class="self best">15.6″ · MT8676 · <b>HUD●</b></td><td class="">15.6″ · 未披露 · HUD—</td><td class="">5X 有 HUD，芯片可查</td></tr><tr><th>扬声器（个）</th><td class="self best">8</td><td class="">7（18 选装）</td><td class="">5X +1，T6 可升 18</td></tr><tr><th>前排座椅</th><td class="self">加热 · 通风 · 主副驾记忆</td><td class="">加热 · 通风（按摩○、二排加热○）</td><td class="">5X 多记忆，T6 可加按摩</td></tr><tr><th>后备厢（L）</th><td class="self">394（常规）／ +158 下沉 ／ 1,815（放倒）</td><td class="best">576–1,796</td><td class="">常规少 182 L；下沉另计 158 L</td></tr><tr><th>天幕 / 座椅材质</th><td class="self">不可开启全景天幕 · 仿皮</td><td class="">不可开启全景天窗 · 仿皮</td><td class="">平</td></tr></tbody></table>
+  <div class="note">⚠ <b>这是功能对齐，不是价格对齐</b>：5X 的全系只有 Ultra 把智驾包写进标配（Max 上 192 线雷达与城市 NOA 都是「○ 选装」，价格未公布），所以「拿 Ultra 比 T6 14.99」在功能上是对得上的，但在价格上是拿 5X 的顶配比 T6 的中配——两边各占一半道理。<br>⚠ <b>到手价的差异全部来自「限时」二字</b>：5X Ultra 指导 15.99、限时权益价 13.99（−2 万，会到期）；T6 指导 14.99、现无现金优惠（2026-11-11 经销商报价 0 万）。权益到期后这一行会翻转成 5X 贵 1 万，结论句必须跟着改。<br>⚠ <b>智驾没有差异，这是本页最重要的结论</b>：两台都是 192 线激光雷达 + 地平线征程 6H + 420 TOPS + 城市/高速 NOA 标配，方案同源（酷睿程 + 地平线）。5X 在宣传里说的「合资首搭」在时间上不成立——T6 早两个月（9-20）就把这套硬件放到了 14.99 万。<br>⚠ <b>T6 首月数据不可比走势</b>：2026-09 上险 702 台（含展车/预售），660 Max 占 351 台 / 50%；它也不进第 2 页池子（4811 mm 超出 4800 mm 上限）。<br>⚠ <b>5X 的「双层/下沉式后备厢」不等于更大</b>：常规 394 L、另设 158 L 下沉空间、放倒 1,815 L（官方与多家媒体口径一致，之家参数表此项为空）；即便把下沉的 158 L 全算进去也只有 552 L，仍小于 T6 的 576 L。下沉层的作用是分层（湿/干、低频/高频、隐私件），而不是扩容；它能有这层深度，前提是<b>全系无备胎</b>（配置表「备胎规格：无」）。<br>⚠ 快充「相同」要按每 10% 电量看：两台都是 22 分钟充 50%（30–80%），折算 4.4 min/10%；5X 电池小 19 kWh，同样 10% 对应的绝对电量更少。<br>数据源：之家 series 8761（Ultra specid 78734）与 8584（T6 660 Max specid 79009），两侧均未解析 0；T6 价格为汽车之家经销商页 2026-11-11 报价。</div>
+ </div>
+</section>
+
+</div></div>
+<div id="fitbar">
+ <span class="scale" id="sv">100%</span>
+ <button onclick="zoom(-0.1)">−</button>
+ <button onclick="zoom(0.1)">＋</button>
+ <span class="sep"></span>
+ <button onclick="fitW()">适宽</button>
+ <button onclick="fit1()">整页</button>
+ <span class="sep"></span>
+ <button id="tbtn" onclick="cycleTheme()">☾ 暗色</button>
+ <button class="pri" onclick="toggleFS()">⛶ 全屏</button>
+ <button onclick="window.print()">PDF</button>
+</div>
+<script>
+const W=1920,H=1080,GAP=24,STAGE_H=2*H+GAP;
+const stage=document.getElementById('stage'),wrap=document.getElementById('wrap');
+const sv=document.getElementById('sv');
+let scale=1,mode=0;
+function setScale(s){
+  scale=Math.max(.2,Math.min(2,s));
+  stage.style.transform='scale('+scale+')';
+  wrap.style.height=(STAGE_H*scale+48)+'px';
+  wrap.style.width=(W*scale)+'px';
+  sv.textContent=Math.round(scale*100)+'%';
+}
+function fitW(){ setScale(Math.min(1.6,(window.innerWidth-56)/W)); }
+function fit1(){ setScale(Math.min((window.innerWidth-56)/W,(window.innerHeight-56)/H)); }
+function zoom(d){ setScale(scale+d); }
+function toggleFS(){
+  if(!document.fullscreenElement){ document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen(); }
+  else{ document.exitFullscreen(); }
+}
+function applyMode(m){
+  mode=m;
+  document.body.classList.toggle('mode-dark',m===1);
+  const b=document.getElementById('tbtn');
+  b.textContent = m===1 ? '☀ 亮色' : '☾ 暗色';
+  try{ localStorage.setItem('deck-theme',m===1?'dark':'light'); }catch(e){}
+}
+function cycleTheme(){ applyMode(mode===1?0:1); }
+document.addEventListener('fullscreenchange',()=>{ requestAnimationFrame(()=>{ document.fullscreenElement?fit1():fitW(); }); });
+window.addEventListener('resize',()=>{ document.fullscreenElement?fit1():fitW(); });
+window.addEventListener('keydown',e=>{
+  if(e.key==='f'||e.key==='F') toggleFS();
+  else if(e.key==='0') fit1();
+  else if(e.key==='w'||e.key==='W') fitW();
+  else if(e.key==='t'||e.key==='T') cycleTheme();
+  else if(e.key==='+'||e.key==='=') zoom(.1);
+  else if(e.key==='-') zoom(-.1);
+  else if(e.key==='Escape'&&!document.fullscreenElement) fitW();
+});
+let saved=0; try{ saved = localStorage.getItem('deck-theme')==='dark' ? 1 : 0; }catch(e){}
+applyMode(saved); fitW();
+</script>
+</body></html>

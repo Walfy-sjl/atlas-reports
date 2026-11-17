@@ -1,0 +1,135 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ --page:#e8e9ee; --slide-bg:#fff; --slide-bg-2:#fff;
+ --fg:#14161c; --ink2:#1f2430; --ink3:#4b5563; --muted:#6b7280;
+ --line:#e3e7ee; --line2:#e2e4ea; --card:#fcfcfe; --card2:#f2f7ff;
+ --zebra:#fafbfc; --self:#e3edfd;
+ --accent:#1d4ed8; --accent-ink:#fff; --gold:#f0c33c;
+ --warn:#b45309; --warn-bg:#fef3c7; --ok:#166534; --ok-bg:#dcfce7;
+ --bad:#991b1b; --bad-bg:#fef2f2; --chip-bg:#eef0f5; --chip-ink:#374151;
+ --buy-bg:#eef2ff; --teal:#0f766e; --teal-bg:#ccfbf1;
+ --shadow:0 10px 26px rgba(29,78,216,.10);
+ background:var(--page); overflow-x:hidden;
+ font:16px/1.5 -apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+ color:var(--fg); -webkit-font-smoothing:antialiased}
+body.mode-dark{
+ --page:#070b12; --slide-bg:linear-gradient(145deg,#0b1526 0%,#122238 55%,#17304d 100%);
+ --slide-bg-2:linear-gradient(145deg,#0b1526 0%,#122238 55%,#17304d 100%);
+ --fg:#eef2f8; --ink2:#dbe3ee; --ink3:#a9b6c8; --muted:#8b99ab;
+ --line:rgba(255,255,255,.14); --line2:rgba(255,255,255,.18);
+ --card:rgba(255,255,255,.045); --card2:rgba(240,195,60,.10);
+ --zebra:rgba(255,255,255,.04); --self:rgba(240,195,60,.12);
+ --accent:#f0c33c; --accent-ink:#231a08;
+ --warn:#fbbf24; --warn-bg:rgba(251,191,36,.14); --ok:#4ade80; --ok-bg:rgba(74,222,128,.14);
+ --bad:#f87171; --bad-bg:rgba(248,113,113,.14); --chip-bg:rgba(255,255,255,.07); --chip-ink:#cfd8e3;
+ --buy-bg:rgba(240,195,60,.10); --teal:#5eead4; --teal-bg:rgba(94,234,212,.12);
+ --shadow:0 10px 26px rgba(0,0,0,.45)}
+#wrap{margin:0 auto;padding:24px 0}
+#stage{width:1920px;transform-origin:top left;display:flex;flex-direction:column;gap:24px}
+.slide{width:1920px;height:1080px;background:var(--slide-bg);position:relative;overflow:hidden;
+ display:flex;flex-direction:column;color:var(--fg)}
+.slide.dark{background:var(--slide-bg-2)}
+.pad{padding:46px 60px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;
+ border-bottom:3px solid currentColor;padding-bottom:14px}
+.h1{font-size:50px;font-weight:800;letter-spacing:-1px;line-height:1.1}
+.h1 em{font-style:normal;color:var(--accent)}
+.sub{margin-top:8px;font-size:18px;font-weight:700;line-height:1.35;max-width:1180px}
+.sub b{color:var(--accent);margin-right:8px;font-weight:800}
+.sub2{margin-top:5px;font-size:12.8px;color:var(--muted);line-height:1.5}
+.badge{display:inline-block;padding:5px 14px;border-radius:999px;background:var(--gold);color:#231a08;
+ font-size:16px;font-weight:700;margin-right:10px}
+.legend{font-size:15px;opacity:.7;text-align:right;line-height:1.7}
+.rules{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:5px 22px;
+ font-size:13.2px;line-height:1.45;color:var(--muted)}
+.rules b{color:var(--accent);font-weight:700}
+.rules i{font-style:normal;opacity:.55;margin-right:5px}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px;flex:1;min-height:0}
+.tier{border:2px solid var(--line2);border-radius:14px;padding:12px 13px 10px;display:flex;
+ flex-direction:column;background:var(--card);min-height:0}
+.tier.hot{border-color:var(--accent);background:var(--card2);box-shadow:var(--shadow)}
+.tier .nm{font-size:16.5px;font-weight:700;color:var(--ink3);line-height:1.25;min-height:20px}
+.tier .pick{display:inline-block;margin-left:7px;padding:1px 7px;border-radius:999px;
+ background:var(--accent);color:var(--accent-ink);font-size:11.5px;font-weight:700;vertical-align:middle}
+.tier .pr{font-size:40px;font-weight:800;color:var(--accent);letter-spacing:-1.5px;line-height:1.05;margin-top:4px}
+.tier .pr small{font-size:16px;font-weight:700;margin-left:2px}
+.tier .deal{font-size:13px;font-weight:700;color:var(--ok);background:var(--ok-bg);border-radius:6px;
+ padding:2px 8px;display:inline-block;margin-top:5px;align-self:flex-start}
+.tier .dlrow{display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap}
+.tier .dl{font-size:13.5px;font-weight:700;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:2px 8px}
+.tier .pw{font-size:12px;font-weight:700;color:var(--teal);background:var(--teal-bg);border-radius:6px;padding:2px 7px}
+.tier .sen{margin-top:6px;font-size:12.8px;line-height:1.4;color:var(--ink2);font-weight:600;
+ background:var(--buy-bg);border-left:3px solid var(--accent);padding:5px 8px;border-radius:0 6px 6px 0}
+.tier .spec{margin-top:4px;font-size:12.2px;line-height:1.42;color:var(--ink3)}
+.tier .spec b{color:var(--muted);font-weight:700;margin-right:5px;font-size:11px;letter-spacing:.3px}
+.tier .gain{margin-top:4px}
+.tier .gl{font-size:11.2px;letter-spacing:.5px;color:var(--ink3);margin-bottom:3px;font-weight:700}
+.tier em{font-style:normal;display:inline-block;font-size:11.5px;font-weight:700;padding:1px 5px;
+ border-radius:5px;margin:0 3px 2px 0;line-height:1.26;background:var(--warn-bg);color:var(--warn)}
+.tier em.n{background:var(--chip-bg);color:var(--chip-ink);font-weight:600}
+.tier em.c{background:var(--bad-bg);color:var(--bad)}
+.tier em.none{background:transparent;color:var(--muted);font-weight:500;padding-left:0}
+.tier .share{margin-top:auto;padding-top:7px;border-top:1px dashed var(--line2);font-size:12.6px;color:var(--muted)}
+.tier .share b{font-size:15px;color:var(--accent);font-weight:800;margin:0 3px}
+.foot{display:grid;grid-template-columns:1.35fr .95fr .9fr;gap:14px;margin-top:14px}
+.foot.f4{grid-template-columns:1.1fr .66fr .72fr 1.02fr;gap:11px}
+.offis{display:flex;flex-direction:column;gap:5px}
+.offi{font-size:12.2px;line-height:1.36;color:var(--ink2)}
+.offi::before{content:'·';color:var(--accent);font-weight:800;margin-right:5px}
+.card{border:1px solid var(--line2);border-radius:12px;padding:12px 14px;background:var(--card)}
+.card h3{font-size:15px;margin-bottom:7px;color:var(--accent);display:flex;align-items:center;gap:8px}
+.card h3 i{width:5px;height:15px;background:var(--accent);border-radius:2px;display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.6px;padding:3px 9px;border-radius:6px;background:var(--chip-bg);color:var(--chip-ink)}
+.bags{display:flex;flex-direction:column;gap:7px}
+.bag{font-size:13px;line-height:1.4}
+.bag b{color:var(--warn)}
+.specbar{display:grid;grid-template-columns:repeat(2,1fr);gap:7px 12px;font-size:13px}
+.specbar div span{color:var(--muted);display:block;font-size:11.4px}
+.specbar div b{font-size:14.2px}
+.note{font-size:12px;color:var(--muted);margin-top:auto;padding-top:7px;border-top:1px solid var(--line);line-height:1.45}
+table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14.8px;flex:1 1 auto;height:100%}
+thead th{padding:8px;font-size:15.4px;font-weight:700;text-align:center;
+ border-bottom:3px solid currentColor;color:var(--fg)}
+thead th.self{background:var(--self);border-radius:10px 10px 0 0}
+.pill{display:inline-block;padding:1px 6px;border-radius:999px;background:var(--accent);
+ color:var(--accent-ink);font-size:10.5px;font-weight:800;margin-right:6px;vertical-align:2px}
+thead th .v{display:block;font-size:12.4px;font-weight:500;color:var(--muted);margin-top:2px}
+thead th .p{display:block;font-size:20px;font-weight:800;color:var(--accent);margin-top:4px}
+tbody th{text-align:left;font-weight:600;color:var(--ink3);font-size:14.2px;padding:2.9px 10px;
+ border-bottom:1px solid var(--line);width:190px}
+tbody td{text-align:center;padding:2.9px 6px;border-bottom:1px solid var(--line);font-size:14.2px;color:var(--fg)}
+tbody td.self{background:var(--self);box-shadow:inset 1px 0 0 var(--accent),inset -1px 0 0 var(--accent)}
+tbody td.best{font-weight:800;color:var(--accent)}
+tbody tr:nth-child(even) td{background-color:var(--zebra)}
+tbody tr:nth-child(even) td.self{background:var(--self)}
+#fitbar{position:fixed;right:18px;bottom:18px;z-index:99;display:flex;align-items:center;gap:8px;
+ background:rgba(18,22,32,.86);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);
+ border-radius:999px;padding:7px 10px;box-shadow:0 8px 28px rgba(0,0,0,.28);
+ font:13px/1 -apple-system,"PingFang SC",system-ui,sans-serif;color:#e8edf5}
+#fitbar .scale{min-width:44px;text-align:center;font-variant-numeric:tabular-nums;opacity:.8}
+#fitbar button{border:0;border-radius:999px;padding:6px 11px;font-size:12.5px;font-weight:700;
+ background:rgba(255,255,255,.10);color:#e8edf5;cursor:pointer}
+#fitbar button:hover{background:rgba(255,255,255,.20)}
+#fitbar button.pri{background:#f0c33c;color:#231a08}
+#fitbar .sep{width:1px;height:18px;background:rgba(255,255,255,.18)}
+@media print{body{background:#fff}#wrap{padding:0}#stage{transform:none!important}
+ .slide{break-after:page}#fitbar{display:none}
+ @page{size:1920px 1080px;margin:0}}
+body.shot #fitbar{display:none}
+</style><style>body{background:#fff;padding:0}#wrap{padding:0}#stage{transform:none!important;width:auto;gap:0}</style></head><body><section class="slide dark">
+ <div class="pad" style="display:flex;flex-direction:column;height:100%">
+  <div class="head">
+   <div>
+    <div class="h1">ID.ERA 5X <em>同池子头部横向对比</em></div>
+    <div class="sub"><b>结论</b>池内 10.6 万台 / 63 车系（2026-09）。5X 的 Max 权益价 12.79 万在七台里排<b>第三贵</b>，155 kW 与 4.4 分钟/10% 的补能也只压过铂智3X（150 kW、4.8 分钟）。而铂智3X 便宜 1.56 万，<b>这一档两车都不带激光雷达与城市 NOA</b>（5X 要选装智驾包、铂智3X 要上到 14.98 万）；5X 多花的是多连杆后悬（对手是扭力梁）+ 全景天幕 + 15.6″ 屏、座椅记忆、方向盘加热。</div>
+    <div class="sub2">六台竞品各取 2026-09 池内上险最高的主销款；5X 取 Max（今日上市，无上险，价格用官方限时权益价）· 抓取 2026-11-12</div>
+   </div>
+   <div class="legend">底色列 = 本品 · <b style="color:var(--accent)">加粗</b> = 该行最优 · ○ = 选装 · — = 无该项<br>不含主观打分，只做事实对照</div>
+  </div>
+  <div class="rules"><div><i>1</i>池子 = <b>纯电 × SUV × 车长 4.3–4.8 m × 成交价 10–16.5 万</b> → 106,256 台 / 63 车系（2026-09 版本级）</div><div><i>2</i>头部 = 池内上险 TOP5（深蓝S05 / 零跑C10 / AION i60 / 海狮05 EV / 小鹏MONA L03）<b>+ 铂智3X</b>（第 7 位 7,402 台，合资纯电直接竞品）；5X 今日上市，占第 7 列</div><div><i>3</i>版本 = 各车 2026-09 上险最高的<b>主销款</b>；5X 无上险，取四档中的 Max（14.79）作配置起点</div><div><i>4</i>价格 = 指导价 / <b>实际成交</b>：竞品为 2026-09 版本级成交价（TP），5X 为官方限时权益价 12.79（今日上市，无 TP）</div></div>
+  <table><thead><tr><th>参数<span class="v">价格：指导 / 成交（万元）</span></th><th class="self"><span class="pill">本品</span>ID.ERA 5X<span class="v">Max（14.79）</span><span class="p">14.79 / 12.79</span></th><th class="">深蓝 S05<span class="v">520 智臻版（主销）</span><span class="p">12.99 / 12.19</span></th><th class="">零跑 C10<span class="v">660 激光雷达版（主销）</span><span class="p">14.28 / 14.19</span></th><th class="">AION i60<span class="v">520 宁德版（主销）</span><span class="p">11.48 / 11.46</span></th><th class="">海狮 05 EV<span class="v">540 智航版（主销）</span><span class="p">12.99 / 12.66</span></th><th class="">小鹏 MONA L03<span class="v">525 Max（主销）</span><span class="p">13.48 / 13.18</span></th><th class="">铂智 3X<span class="v">520 Pro（主销）</span><span class="p">12.98 / 11.23</span></th></tr></thead><tbody><tr><th>池内上险（辆，09）</th><td class="self">0（今日上市）</td><td class="best">11,444</td><td class="">8,699</td><td class="">8,387</td><td class="">8,380</td><td class="">7,965</td><td class="">7,402</td></tr><tr><th>池内份额（%）</th><td class="self">—</td><td class="best">10.8</td><td class="">8.2</td><td class="">7.9</td><td class="">7.9</td><td class="">7.5</td><td class="">7.0</td></tr><tr><th>主销款（9 月占比）</th><td class="self">未上市 · 无主销</td><td class="">12.99 万 · 51%</td><td class="">14.28 万 · 54%</td><td class="">11.48 万 · 35%</td><td class="">12.99 万 · 60%</td><td class="">13.48 万 · 52%</td><td class="">12.98 万 · 56%</td></tr><tr><th>长×宽×高（mm）</th><td class="self">4560×1896×1630</td><td class="">4620×1900×1600</td><td class="">4749×1900×1680</td><td class="">4685×1854×1660</td><td class="">4620×1860×1630</td><td class="">4650×1920×1600</td><td class="">4600×1850×1660</td></tr><tr><th>轴距（mm）</th><td class="self">2815</td><td class="best">2880</td><td class="">2825</td><td class="">2775</td><td class="">2770</td><td class="">2850</td><td class="">2765</td></tr><tr><th>电池（kWh · 电芯）</th><td class="self">58.5 · 宁德(时代上汽)</td><td class="">56.12 · 宁德</td><td class="best">81.9 · 中创新航/亿纬/国轩</td><td class="">56.68 · 宁德(时代广汽)</td><td class="">57.55 · 弗迪</td><td class="">56 · 中创新航</td><td class="">58.37 · 中创新航/正力</td></tr><tr><th>CLTC 纯电（km）</th><td class="self">520</td><td class="">520</td><td class="best">660</td><td class="">520</td><td class="">540</td><td class="">525</td><td class="">520</td></tr><tr><th>快充（原值→每10%）</th><td class="self">22（30–80%）→ 4.4</td><td class="">15（30–80%）→ 3.0</td><td class="">16（30–80%）→ 3.2</td><td class="">22（30–80%）→ 4.4</td><td class="best">9（10–97%）→ 1.0</td><td class="">15.8（30–80%）→ 3.2</td><td class="">24（30–80%）→ 4.8</td></tr><tr><th>驱动 / 功率（kW）</th><td class="self">前驱 155</td><td class="">后驱 200</td><td class="best">后驱 230</td><td class="">前驱 165</td><td class="">后驱 200</td><td class="">后驱 183</td><td class="">前驱 150</td></tr><tr><th>0–100 km/h（s）</th><td class="self">7.3</td><td class="">6.28</td><td class="best">6.02</td><td class="">未披露</td><td class="">6.6</td><td class="">7.5</td><td class="">未披露</td></tr><tr><th>悬架 / 可变阻尼</th><td class="self">麦弗逊 + 多连杆 · 无</td><td class="best">麦弗逊 + 五连杆 · 软硬●</td><td class="best">麦弗逊 + 五连杆 · 软硬●</td><td class="">麦弗逊 + 五连杆 · 无</td><td class="">麦弗逊 + 五连杆 · 无</td><td class="">麦弗逊 + 五连杆 · 软硬○</td><td class="">麦弗逊 + 扭力梁 · 无</td></tr><tr><th>后备厢（L）</th><td class="self">未披露</td><td class="">492</td><td class="">510–1809</td><td class="">416–967</td><td class="best">600</td><td class="">539–1640</td><td class="">未披露</td></tr><tr><th>激光雷达</th><td class="self">○ 选装（192 线）</td><td class="">—</td><td class="best">● 128 线</td><td class="">—</td><td class="">○ 选装</td><td class="">—</td><td class="">—</td></tr><tr><th>智驾芯片 / 算力</th><td class="self">○ 征程 6H · 420 TOPS</td><td class="">—</td><td class="">骁龙 8650 · 未披露</td><td class="">—</td><td class="">Orin-N · 84 TOPS</td><td class="best">图灵 · 750 TOPS</td><td class="">—</td></tr><tr><th>城市 NOA</th><td class="self">○ 选装</td><td class="">—（仅高速）</td><td class="best">●</td><td class="">—</td><td class="">○ 选装</td><td class="best">●</td><td class="">—</td></tr><tr><th>中控屏 / 车机芯片</th><td class="self">15.6″ / MT8676</td><td class="">15.4″ / 未披露</td><td class="best">17.3″ / 骁龙 8295P</td><td class="">15.6″ / 骁龙 8155P</td><td class="">15.6″ / 比亚迪 D100</td><td class="">15.6″ / MT8676</td><td class="">14.6″ / 骁龙 8155</td></tr><tr><th>扬声器（个）</th><td class="self">8</td><td class="">8（14○）</td><td class="best">18</td><td class="">6</td><td class="">8</td><td class="">9（20○）</td><td class="">9（11○）</td></tr><tr><th>前排座椅功能</th><td class="self">加热 · 通风</td><td class="best">加热 · 通风 · 按摩（主驾）</td><td class="">加热 · 通风 · 按摩○</td><td class="">—</td><td class="">加热 · 通风</td><td class="">加热 · 通风 · 按摩○</td><td class="">加热 · 通风 · 按摩○</td></tr><tr><th>天窗 / 座椅材质</th><td class="self">不可开启全景天幕 · 仿皮</td><td class="">不可开启全景天窗 · 仿皮</td><td class="">不可开启全景天窗 · 仿皮</td><td class="">无天窗 · 仿皮</td><td class="">不可开启全景天窗 · 仿皮</td><td class="">不可开启全景天窗 · 仿皮（真皮○）</td><td class="">无天窗 · 仿皮</td></tr></tbody></table>
+  <div class="note">⚠ <b>5X 今日上市</b>：无上险、无成交价，价格列用官方<b>限时权益价 12.79 万</b>（Max，指导价 14.79，全系一律 −2 万）；竞品为 2026-09 版本级成交价（TP），同为「实际到手价」口径，可直接比。<br>⚠ 深蓝S05 的 12.99 万横跨两年款三条编码（TP 11.49–12.19）：占比按指导价聚合 51%，TP 取当月最热的 2027 款 12.19；铂智3X 12.98 万有两款同价配置（同 TP），主销款是池内唯一的<b>扭力梁</b>、无天窗；<b>激光雷达与城市 NOA 这一档两车都没有</b>（5X 选装、铂智3X 要 14.98 万），表里分别是「○ 选装」与「—」，不等于「5X 有」。<br>⚠ 快充区间不同（海狮05 10–97%，其余 30–80%），已折成「每 10% 电量耗时」：5X 4.4 / S05 3.0 / C10 3.2 / i60 4.4 / 海狮05 1.0 / L03 3.2 / 铂智3X 4.8 分钟。5X 后备厢之家未录入（官网 1,815 L 为放倒容积），写「未披露」而非「没有」。份额 = 池内上险 ÷ 106,256，主销占比 = 该档上险 ÷ 该车池内上险，均为 <b>2026-09 单月</b>；页面数字经 verify_page.py 版本级对账。</div>
+ </div>
+</section></body></html>

@@ -1,0 +1,142 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ --page:#e8e9ee; --slide-bg:#fff; --slide-bg-2:#fff;
+ --fg:#14161c; --ink2:#1f2430; --ink3:#4b5563; --muted:#6b7280;
+ --line:#e3e7ee; --line2:#e2e4ea; --card:#fcfcfe; --card2:#f2f7ff;
+ --zebra:#fafbfc; --self:#e3edfd;
+ --accent:#1d4ed8; --accent-ink:#fff; --gold:#f0c33c;
+ --warn:#b45309; --warn-bg:#fef3c7; --ok:#166534; --ok-bg:#dcfce7;
+ --bad:#991b1b; --bad-bg:#fef2f2; --chip-bg:#eef0f5; --chip-ink:#374151;
+ --buy-bg:#eef2ff; --teal:#0f766e; --teal-bg:#ccfbf1;
+ --shadow:0 10px 26px rgba(29,78,216,.10);
+ background:var(--page); overflow-x:hidden;
+ font:16px/1.5 -apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+ color:var(--fg); -webkit-font-smoothing:antialiased}
+body.mode-dark{
+ --page:#070b12; --slide-bg:linear-gradient(145deg,#0b1526 0%,#122238 55%,#17304d 100%);
+ --slide-bg-2:linear-gradient(145deg,#0b1526 0%,#122238 55%,#17304d 100%);
+ --fg:#eef2f8; --ink2:#dbe3ee; --ink3:#a9b6c8; --muted:#8b99ab;
+ --line:rgba(255,255,255,.14); --line2:rgba(255,255,255,.18);
+ --card:rgba(255,255,255,.045); --card2:rgba(240,195,60,.10);
+ --zebra:rgba(255,255,255,.04); --self:rgba(240,195,60,.12);
+ --accent:#f0c33c; --accent-ink:#231a08;
+ --warn:#fbbf24; --warn-bg:rgba(251,191,36,.14); --ok:#4ade80; --ok-bg:rgba(74,222,128,.14);
+ --bad:#f87171; --bad-bg:rgba(248,113,113,.14); --chip-bg:rgba(255,255,255,.07); --chip-ink:#cfd8e3;
+ --buy-bg:rgba(240,195,60,.10); --teal:#5eead4; --teal-bg:rgba(94,234,212,.12);
+ --shadow:0 10px 26px rgba(0,0,0,.45)}
+#wrap{margin:0 auto;padding:24px 0}
+#stage{width:1920px;transform-origin:top left;display:flex;flex-direction:column;gap:24px}
+.slide{width:1920px;height:1080px;background:var(--slide-bg);position:relative;overflow:hidden;
+ display:flex;flex-direction:column;color:var(--fg)}
+.slide.dark{background:var(--slide-bg-2)}
+.pad{padding:46px 60px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;
+ border-bottom:3px solid currentColor;padding-bottom:14px}
+.h1{font-size:50px;font-weight:800;letter-spacing:-1px;line-height:1.1}
+.h1 em{font-style:normal;color:var(--accent)}
+.sub{margin-top:8px;font-size:18px;font-weight:700;line-height:1.35;max-width:1180px}
+.sub b{color:var(--accent);margin-right:8px;font-weight:800}
+.sub2{margin-top:5px;font-size:12.8px;color:var(--muted);line-height:1.5}
+.badge{display:inline-block;padding:5px 14px;border-radius:999px;background:var(--gold);color:#231a08;
+ font-size:16px;font-weight:700;margin-right:10px}
+.legend{font-size:15px;opacity:.7;text-align:right;line-height:1.7}
+.rules{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:5px 22px;
+ font-size:13.2px;line-height:1.45;color:var(--muted)}
+.rules b{color:var(--accent);font-weight:700}
+.rules i{font-style:normal;opacity:.55;margin-right:5px}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px;flex:1;min-height:0}
+.tier{border:2px solid var(--line2);border-radius:14px;padding:12px 13px 10px;display:flex;
+ flex-direction:column;background:var(--card);min-height:0}
+.tier.hot{border-color:var(--accent);background:var(--card2);box-shadow:var(--shadow)}
+.tier .nm{font-size:16.5px;font-weight:700;color:var(--ink3);line-height:1.25;min-height:20px}
+.tier .pick{display:inline-block;margin-left:7px;padding:1px 7px;border-radius:999px;
+ background:var(--accent);color:var(--accent-ink);font-size:11.5px;font-weight:700;vertical-align:middle}
+.tier .pr{font-size:40px;font-weight:800;color:var(--accent);letter-spacing:-1.5px;line-height:1.05;margin-top:4px}
+.tier .pr small{font-size:16px;font-weight:700;margin-left:2px}
+.tier .deal{font-size:13px;font-weight:700;color:var(--ok);background:var(--ok-bg);border-radius:6px;
+ padding:2px 8px;display:inline-block;margin-top:5px;align-self:flex-start}
+.tier .dlrow{display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap}
+.tier .dl{font-size:13.5px;font-weight:700;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:2px 8px}
+.tier .pw{font-size:12px;font-weight:700;color:var(--teal);background:var(--teal-bg);border-radius:6px;padding:2px 7px}
+.tier .sen{margin-top:6px;font-size:12.8px;line-height:1.4;color:var(--ink2);font-weight:600;
+ background:var(--buy-bg);border-left:3px solid var(--accent);padding:5px 8px;border-radius:0 6px 6px 0}
+.tier .spec{margin-top:4px;font-size:12.2px;line-height:1.42;color:var(--ink3)}
+.tier .spec b{color:var(--muted);font-weight:700;margin-right:5px;font-size:11px;letter-spacing:.3px}
+.tier .gain{margin-top:4px}
+.tier .gl{font-size:11.2px;letter-spacing:.5px;color:var(--ink3);margin-bottom:3px;font-weight:700}
+.tier em{font-style:normal;display:inline-block;font-size:11.5px;font-weight:700;padding:1px 5px;
+ border-radius:5px;margin:0 3px 2px 0;line-height:1.26;background:var(--warn-bg);color:var(--warn)}
+.tier em.n{background:var(--chip-bg);color:var(--chip-ink);font-weight:600}
+.tier em.c{background:var(--bad-bg);color:var(--bad)}
+.tier em.none{background:transparent;color:var(--muted);font-weight:500;padding-left:0}
+.tier .share{margin-top:auto;padding-top:7px;border-top:1px dashed var(--line2);font-size:12.6px;color:var(--muted)}
+.tier .share b{font-size:15px;color:var(--accent);font-weight:800;margin:0 3px}
+.foot{display:grid;grid-template-columns:1.35fr .95fr .9fr;gap:14px;margin-top:14px}
+.foot.f4{grid-template-columns:1.1fr .66fr .72fr 1.02fr;gap:11px}
+.offis{display:flex;flex-direction:column;gap:5px}
+.offi{font-size:12.2px;line-height:1.36;color:var(--ink2)}
+.offi::before{content:'·';color:var(--accent);font-weight:800;margin-right:5px}
+.card{border:1px solid var(--line2);border-radius:12px;padding:12px 14px;background:var(--card)}
+.card h3{font-size:15px;margin-bottom:7px;color:var(--accent);display:flex;align-items:center;gap:8px}
+.card h3 i{width:5px;height:15px;background:var(--accent);border-radius:2px;display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.6px;padding:3px 9px;border-radius:6px;background:var(--chip-bg);color:var(--chip-ink)}
+.bags{display:flex;flex-direction:column;gap:7px}
+.bag{font-size:13px;line-height:1.4}
+.bag b{color:var(--warn)}
+.specbar{display:grid;grid-template-columns:repeat(2,1fr);gap:7px 12px;font-size:13px}
+.specbar div span{color:var(--muted);display:block;font-size:11.4px}
+.specbar div b{font-size:14.2px}
+.note{font-size:12px;color:var(--muted);margin-top:auto;padding-top:7px;border-top:1px solid var(--line);line-height:1.45}
+table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14.8px;flex:1 1 auto;height:100%}
+thead th{padding:8px;font-size:15.4px;font-weight:700;text-align:center;
+ border-bottom:3px solid currentColor;color:var(--fg)}
+thead th.self{background:var(--self);border-radius:10px 10px 0 0}
+.pill{display:inline-block;padding:1px 6px;border-radius:999px;background:var(--accent);
+ color:var(--accent-ink);font-size:10.5px;font-weight:800;margin-right:6px;vertical-align:2px}
+thead th .v{display:block;font-size:12.4px;font-weight:500;color:var(--muted);margin-top:2px}
+thead th .p{display:block;font-size:20px;font-weight:800;color:var(--accent);margin-top:4px}
+tbody th{text-align:left;font-weight:600;color:var(--ink3);font-size:14.2px;padding:2.9px 10px;
+ border-bottom:1px solid var(--line);width:190px}
+tbody td{text-align:center;padding:2.9px 6px;border-bottom:1px solid var(--line);font-size:14.2px;color:var(--fg)}
+tbody td.self{background:var(--self);box-shadow:inset 1px 0 0 var(--accent),inset -1px 0 0 var(--accent)}
+tbody td.best{font-weight:800;color:var(--accent)}
+tbody tr:nth-child(even) td{background-color:var(--zebra)}
+tbody tr:nth-child(even) td.self{background:var(--self)}
+#fitbar{position:fixed;right:18px;bottom:18px;z-index:99;display:flex;align-items:center;gap:8px;
+ background:rgba(18,22,32,.86);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);
+ border-radius:999px;padding:7px 10px;box-shadow:0 8px 28px rgba(0,0,0,.28);
+ font:13px/1 -apple-system,"PingFang SC",system-ui,sans-serif;color:#e8edf5}
+#fitbar .scale{min-width:44px;text-align:center;font-variant-numeric:tabular-nums;opacity:.8}
+#fitbar button{border:0;border-radius:999px;padding:6px 11px;font-size:12.5px;font-weight:700;
+ background:rgba(255,255,255,.10);color:#e8edf5;cursor:pointer}
+#fitbar button:hover{background:rgba(255,255,255,.20)}
+#fitbar button.pri{background:#f0c33c;color:#231a08}
+#fitbar .sep{width:1px;height:18px;background:rgba(255,255,255,.18)}
+@media print{body{background:#fff}#wrap{padding:0}#stage{transform:none!important}
+ .slide{break-after:page}#fitbar{display:none}
+ @page{size:1920px 1080px;margin:0}}
+body.shot #fitbar{display:none}
+</style><style>body{background:#fff;padding:0}#wrap{padding:0}#stage{transform:none!important;width:auto;gap:0}</style></head><body><section class="slide">
+ <div class="pad" style="display:flex;flex-direction:column;height:100%">
+  <div class="head">
+   <div>
+    <div class="h1">ID.ERA 5X <em>四个配置怎么选</em></div>
+    <div class="sub"><b>结论</b>限时权益价 9.99 / 11.59 / 12.79 / 13.99 万（全系统一降 2 万），但结构是 2×2：Pro+ 的 1.6 万只买了 13.7 kWh 电池，配置项零变化；智驾硬件从 Max 才出现，且在 Max 上仍是「选装」，到 Ultra 才写进标配——所以「买哪档」其实卡在智驾包的价钱上，而官方没公布。</div>
+    <div class="sub2">指导价 11.99–15.99 万 · 限时权益价 9.99–13.99 万（官方上市海报）· 2026-11-12 上市 · 抓取 2026-11-12</div>
+   </div>
+   <div class="legend">
+    <span class="badge">2026 款 · 4 个配置 / 3 个价差台阶</span><br>每档只列与上一档的差异（口径与来源见页脚）
+   </div>
+  </div>
+  <div class="tiers" style="grid-template-columns:repeat(4,1fr)"><div class="tier"><div class="nm">2026款 Pro</div><div class="pr">11.99<small>万</small></div><div class="deal">成交 9.99</div><div class="dlrow"><div class="dl">起步</div></div><div class="sen">入门档：智舱与补能一件没砍，但 415 km + 215 窄胎 + 天幕要选装</div><div class="spec"><b>本档规格</b>45.8 kWh 铁锂 · CLTC 415 km · 155 kW 前驱 · 仿皮无加热 · 天幕○</div><div class="share">上险 <b>无（今日上市）</b></div><div class="fit" style="margin-top:8px;font-size:12.8px;color:var(--ink3)"><b style="color:var(--accent);margin-right:6px">适合</b>入门价广告位：有家充、只在城里跑</div></div><div class="tier"><div class="nm">2026款 Pro+</div><div class="pr">13.59<small>万</small></div><div class="deal">成交 11.59</div><div class="dlrow"><div class="dl">+1.60 万</div><span class="pw">续航包</span></div><div class="sen">1.6 万只买 13.7 kWh 电池，配置零变化</div><div class="spec"><b>本档规格</b>58.5 kWh 铁锂 · 520 km · 同 Pro · 整备质量 +95 kg</div><div class="gain"><div class="gl">多了 · 新增标配</div><em class="none">—</em></div><div class="gain"><div class="gl">也变了 · 换规格</div><em class="n">纯电 415→520 km</em><em class="n">电池 45.8→58.5 kWh</em></div><div class="gain"><div class="gl">代价 · 减配</div><em class="c">0–100 7.1→7.3 s</em></div><div class="share">上险 <b>无（今日上市）</b></div><div class="fit" style="margin-top:8px;font-size:12.8px;color:var(--ink3)"><b style="color:var(--accent);margin-right:6px">适合</b>必须 520 km 又咬死 14 万内</div></div><div class="tier"><div class="nm">2026款 Max</div><div class="pr">14.79<small>万</small></div><div class="deal">成交 12.79</div><div class="dlrow"><div class="dl">+1.20 万</div><span class="pw">舒适 + 电芯</span></div><div class="sen">舒适件补齐，智驾仍选装</div><div class="spec"><b>本档规格</b>58.5 kWh 宁德 · 18 吋 · 电动尾门 · 前排加热通风</div><div class="gain"><div class="gl">多了 · 新增标配</div><em class="">便利件（尾门 + 后视镜）</em><em class="">全景天幕套装（选装转标配）</em><em class="">座舱舒适包</em></div><div class="gain"><div class="gl">也变了 · 换规格</div><em class="n">电芯 国轩高科→宁德(时代上汽)</em><em class="n">前方感知摄像头双目（可选装）</em></div><div class="gain"><div class="gl">代价 · 减配</div><em class="none">—</em></div><div class="share">上险 <b>无（今日上市）</b></div><div class="fit" style="margin-top:8px;font-size:12.8px;color:var(--ink3)"><b style="color:var(--accent);margin-right:6px">适合</b>要舒适与座舱，智驾再议</div></div><div class="tier"><div class="nm">2026款 Ultra</div><div class="pr">15.99<small>万</small></div><div class="deal">成交 13.99</div><div class="dlrow"><div class="dl">+1.20 万</div><span class="pw">满配</span></div><div class="sen">智驾包 + HUD 一次给全</div><div class="spec"><b>本档规格</b>19 吋 235/45 · HUD · 192 线雷达 · 征程 6H/420 TOPS</div><div class="gain"><div class="gl">多了 · 新增标配</div><em class="">智驾包（选装转标配）</em><em class="">座舱智能件（选装转标配）</em></div><div class="gain"><div class="gl">也变了 · 换规格</div><em class="n">前方感知摄像头 单目→双目</em></div><div class="gain"><div class="gl">代价 · 减配</div><em class="none">—</em></div><div class="share">上险 <b>无（今日上市）</b></div><div class="fit" style="margin-top:8px;font-size:12.8px;color:var(--ink3)"><b style="color:var(--accent);margin-right:6px">适合</b>智驾与胎宽都要到位</div></div></div>
+  <div class="foot f4">
+   <div class="card"><h3><i></i>全系都有（不用挑版本）</h3><div class="chips"><span class="chip">15.6″ 2.5K 中控屏</span><span class="chip">MT8676 + VW OS</span><span class="chip">10.25″ 液晶仪表</span><span class="chip">LED 自动大灯 + 自适应远近光</span><span class="chip">热泵空调</span><span class="chip">3.5 kW 对外放电</span><span class="chip">360° 影像 + 透明底盘</span><span class="chip">12 超声波雷达</span><span class="chip">L2（全速 ACC + 车道居中）</span><span class="chip">快充 22 min（30–80%）</span><span class="chip">前排中间气囊</span><span class="chip">50W 手机无线充</span><span class="chip">CarPlay / HiCar / CarLink</span></div></div>
+   <div class="card"><h3><i></i>权益与选装</h3><div class="bags"><div class="bag"><b>限时权益价 9.99–13.99 万</b>（官方上市海报）：Pro 11.99→9.99、Pro+ 13.59→11.59、Max 14.79→12.79、Ultra 15.99→13.99，<b>全系统一降 2 万，档间价差不变</b></div><div class="bag"><b>四礼</b>：保值回购礼 · 限时焕新礼 · 装备升级礼 · 智行守护礼（内容未公开，智行守护礼疑为智驾相关权益）</div><div class="bag"><b>智驾包（Max 选装，价格未公开）</b>：192 线激光雷达 + 征程 6H / 420 TOPS + 11 摄像头 + 城市/高速 NOA；Ultra 标配</div><div class="bag"><b>选装</b>：心情套件（灵感窗 / 能量岛 / 光映盒）· 19 吋轮毂（Ultra 标配）· 五款车色</div></div></div>
+   <div class="card"><h3><i></i>车身与三电</h3><div class="specbar"><div><span>长×宽×高 (mm)</span><b>4560×1896×1630</b></div><div><span>轴距 (mm)</span><b>2815</b></div><div><span>电池</span><b>45.8 / 58.5 kWh 铁锂</b></div><div><span>快充</span><b>22 min（30–80%）</b></div></div></div>
+   <div class="card"><h3><i></i>官网独有（之家参数表没有）</h3><div class="offis"><div class="offi">官方<b>限时权益价 9.99 万元起</b>，四档一律 −2 万（9.99 / 11.59 / 12.79 / 13.99）；四礼：保值回购 / 限时焕新 / 装备升级 / 智行守护</div><div class="offi"><b>车位到车位 NOA</b>：起点车位出发到终点车位全程无断点；RPA 遥控泊车、循迹倒车记忆 200 m、晕车舒缓模式</div><div class="offi"><b>87.3% 得房率 · 1,815 L 行李厢 · 39 处储物</b> + 主驾座椅抽屉 + 电动密码手套箱（之家「后备厢容积」为空）</div><div class="offi">7 安全气囊（含 117 L 副驾气囊）· 高强度钢占比 83% · 2,000 J 底部装甲 · 碰撞 2 ms 内断高压</div><div class="offi">豆包大模型 2.0 行业首发 · Face ID · 手势指代控制车窗/遮阳帘 · 二排放平 2.4 m 大床模式</div></div></div>
+  </div>
+  <div class="note">⚠ <b>Pro+ 的 1.6 万是纯电池升级</b>：45.8→58.5 kWh、+105 km，除电池与加速外配置项零变化（引擎算出的「多了」为 0 项）；代价是整备质量 +95 kg、0–100 从 7.1 s 变 7.3 s。<br>⚠ <b>Pro / Pro+ 的全景天幕、车顶行李架、天幕遮阳帘都是「○ 选装」</b>，到 Max 才转标配——权益价 9.99 万这档连天幕都要另付。<br>⚠ <b>Max 的 1.2 万＝</b>电动尾门 · 全景天幕套装 · 座舱舒适包（座椅/方向盘/氛围灯）· 电芯换宁德。<br>⚠ <b>Max 的智驾是选装，不是标配</b>：之家把 Max 的激光雷达 / 征程 6H / 420 TOPS / 11 摄像头 / 城市+高速 NOA 全部标「2（选装）」，另有 13 项功能标「○」，到 Ultra 才「1（标配）」。智驾包价格未公开，是这张表唯一算不出的数。<br>⚠ <b>主销预判（无自家上险，用同池结构推）</b>：低续航档在池内普遍不吃量——铂智3X 430 km 占 12%、海狮05 430 km 占 2%，且铂智3X 该档 72% 是最便宜的 Air（10.98 万）。故 415 km 的 Pro 更像「9.99 万起」的价格广告位，<b>主销大概率落在 520 km 的 Pro+ 或 Max</b>（+1.6 / +1.2 万换 105 km 与舒适件）。<br>数据源：之家 series 8761（4 版本 / 219 行 / 未解析 0）+ 上汽大众官网与上市海报，2026-11-12 抓取。</div>
+ </div>
+</section></body></html>
